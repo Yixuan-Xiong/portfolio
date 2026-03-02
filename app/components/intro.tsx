@@ -18,7 +18,7 @@ export default function Intro() {
 	const rafRef = useRef<number | null>(null);
 
 	const sidebarTitleClass = useMemo(
-		() => 'text-[14px] uppercase tracking-[0.35em] font-medium opacity-75',
+		() => 'text-[12px] uppercase tracking-[0.35em] font-medium opacity-75',
 		[]
 	);
 
@@ -90,26 +90,26 @@ export default function Intro() {
 			id='intro'
 		>
 			{/* ===== 左侧 About Me ===== */}
-			<div className='absolute left-12 top-32 z-20'>
-				<h2 className='text-[26px] uppercase tracking-[0.25em] font-medium opacity-80'>
+			<div className='absolute left-10 top-28 z-20'>
+				<h2 className='text-[22px] uppercase tracking-[0.25em] font-medium opacity-80'>
 					About Me
 				</h2>
 			</div>
 
-			{/* ===== 竖线（恢复）===== */}
-			<div className='pointer-events-none absolute top-0 z-10 hidden lg:block h-full w-px bg-white/15 dark:bg-black/15 right-[calc(3rem+320px+3rem)]' />
+			{/* ===== 竖线 ===== */}
+			<div className='pointer-events-none absolute top-0 z-10 hidden lg:block h-full w-px bg-white/15 dark:bg-black/15 right-[calc(2.5rem+300px+2.5rem)]' />
 
 			{/* ===== 右侧 Skills / Tools ===== */}
 			<div
 				ref={refSkills}
-				className='pointer-events-none absolute right-12 z-20 hidden lg:block'
+				className='pointer-events-none absolute right-10 z-20 hidden lg:block'
 				style={{ top: skillsTop }}
 			>
-				<div className='w-[320px] space-y-12'>
+				<div className='w-[300px] space-y-10'>
 					<div className='space-y-4'>
 						<div className={sidebarTitleClass}>Skills</div>
 
-						<div className='space-y-3 text-[16px] leading-[1.25]'>
+						<div className='space-y-3 text-[14px] leading-[1.35]'>
 							<div>Brand Strategy &amp; Positioning</div>
 							<div>Visual Identity System Design</div>
 							<div>Graphic Design</div>
@@ -123,7 +123,7 @@ export default function Intro() {
 					<div className='space-y-4'>
 						<div className={sidebarTitleClass}>Tools</div>
 
-						<div className='flex flex-wrap gap-x-4 gap-y-3 text-[16px] leading-[1.45] opacity-85'>
+						<div className='flex flex-wrap gap-x-4 gap-y-2 text-[14px] leading-[1.55] opacity-85'>
 							<span>Adobe Illustrator</span>
 							<span>Adobe Photoshop</span>
 							<span>Adobe InDesign</span>
@@ -145,9 +145,8 @@ export default function Intro() {
 			</div>
 
 			{/* ===== 中间正文 ===== */}
-			<div className='mx-auto flex max-w-6xl flex-col justify-start px-12 pt-32 pb-24 text-xl font-medium leading-[1.7] md:text-2xl lg:text-3xl'>
-				<div className='max-w-[64rem] space-y-20'>
-
+			<div className='mx-auto flex max-w-[1120px] flex-col justify-start px-10 pt-28 pb-24 font-medium leading-[1.55] text-[clamp(1.05rem,1.15vw,1.55rem)]'>
+				<div className='max-w-[64rem] space-y-16'>
 					<div style={{ opacity: opacityForBlock(progress, 0) }}>
 						Since 2019, I have worked independently as a freelance designer,
 						collaborating with over 100 companies to develop e-commerce design
@@ -174,7 +173,6 @@ export default function Intro() {
 						to design exhibition catalogues, posters and promotional materials,
 						expanding my practice into editorial and cultural design.
 					</div>
-
 				</div>
 			</div>
 		</div>
