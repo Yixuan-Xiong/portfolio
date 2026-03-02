@@ -118,9 +118,8 @@ export default function Intro() {
 						{/* ✅ 竖线：只在大屏显示 */}
 						<div className='pointer-events-none absolute top-0 hidden h-full w-px bg-white/10 dark:bg-black/10 lg:block left-0' />
 
-						{/* ✅ 关键：右侧整块钉在“右栏底部”，自然与中间最后一段底对齐 */}
-						<div className='hidden lg:block absolute bottom-0 right-0 pl-10'>
-							{/* ✅ Skills/Tools 间距更紧凑 */}
+						{/* ✅ 关键：在“竖线 ↔ 右边界”之间水平居中 + 底部对齐 */}
+						<div className='hidden lg:flex absolute bottom-0 inset-x-0 justify-center'>
 							<div className='w-[260px] space-y-6'>
 								<div className='space-y-3'>
 									<div className={sidebarTitleClass}>Skills</div>

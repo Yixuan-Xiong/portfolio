@@ -20,7 +20,7 @@ export default function Page() {
 				</h1>
 
 				<p className='text-[14px] leading-[1.7] text-gray-600 dark:text-gray-400'>
-					Explore my work by service category.
+					Explore my work by service category
 				</p>
 			</div>
 
