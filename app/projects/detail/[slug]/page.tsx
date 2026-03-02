@@ -48,7 +48,7 @@ export default async function WorkDetailPage({
 			</div>
 
 			<div className='mt-14 w-full'>
-				<div className='mx-auto w-full max-w-7xl'>
+				<div className='mx-auto w-full max-w-[1100px]'>
 					{work.detailImages.map((src, index) => (
 						<Image
 							key={`${work.id}-${index}`}

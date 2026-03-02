@@ -17,10 +17,9 @@ export default function Intro() {
 
 	const rafRef = useRef<number | null>(null);
 
-	// ✅ Sidebar 标题：整体更小（像注释），但保持 uppercase + tracking
+	// ✅ Sidebar 标题：小一点，但清晰
 	const sidebarTitleClass = useMemo(
-		() =>
-			'text-[12px] uppercase tracking-[0.38em] font-medium opacity-60',
+		() => 'text-[12px] uppercase tracking-[0.38em] font-medium opacity-60',
 		[]
 	);
 
@@ -91,88 +90,99 @@ export default function Intro() {
 			className='relative z-10 bg-black text-white dark:bg-white dark:text-black'
 			id='intro'
 		>
-			{/* ===== 左侧 About Me ===== */}
-			<div className='absolute left-10 top-28 z-20'>
-				<h2 className='text-[18px] uppercase tracking-[0.32em] font-medium opacity-75'>
-					About Me
-				</h2>
-			</div>
+			{/* ================= Three-column Swiss container ================= */}
+			<div className='mx-auto w-full max-w-[1400px] px-10 pt-28 pb-24 lg:px-16'>
+				<div className='relative grid grid-cols-12 gap-x-16'>
+					{/* ===== Left: About Me ===== */}
+					<div className='col-span-12 lg:col-span-3'>
+						<h2 className='text-[18px] uppercase tracking-[0.32em] font-medium opacity-75'>
+							About Me
+						</h2>
+					</div>
 
-			{/* ===== 竖线 ===== */}
-			<div className='pointer-events-none absolute top-0 z-10 hidden lg:block h-full w-px bg-white/10 dark:bg-black/10 right-[calc(2.5rem+260px+2.5rem)]' />
+					{/* ===== Middle: Text ===== */}
+					<div className='col-span-12 mt-14 lg:col-span-6 lg:mt-0'>
+						<div className='max-w-[42rem] space-y-16 font-medium leading-[1.75] text-[clamp(1.05rem,1.05vw,1.45rem)]'>
+							<div style={{ opacity: opacityForBlock(progress, 0) }}>
+								Since 2019, I have worked independently as a freelance designer,
+								collaborating with over 100 companies to develop e-commerce design
+								solutions across platforms such as Amazon and TikTok.
+							</div>
 
-			{/* ===== 右侧 Skills / Tools ===== */}
-			<div
-				ref={refSkills}
-				className='pointer-events-none absolute right-10 z-20 hidden lg:block'
-				style={{ top: skillsTop }}
-			>
-				<div className='w-[260px] space-y-10'>
-					<div className='space-y-4'>
-						<div className={sidebarTitleClass}>Skills</div>
+							<div style={{ opacity: opacityForBlock(progress, 1) }}>
+								By combining structured visual systems with strategic thinking, I
+								have helped brands enhance engagement, visibility and conversion
+								performance.
+							</div>
 
-						{/* ✅ 内容：更小、更轻（像脚注） */}
-						<div className='space-y-2 text-[12px] leading-[1.45] opacity-70'>
-							<div>Brand Strategy &amp; Positioning</div>
-							<div>Visual Identity System Design</div>
-							<div>Graphic Design</div>
-							<div>Print &amp; Publication Design</div>
-							<div>Digital Design &amp; E-commerce Design</div>
-							<div>3D Modelling &amp; Rendering</div>
-							<div>AI Image Generation</div>
+							<div style={{ opacity: opacityForBlock(progress, 2) }}>
+								In addition to digital commerce design, I provide product modelling
+								and 3D visualisation, as well as brand strategy support,
+								strengthening product presentation and overall brand experience.
+							</div>
+
+							<div
+								ref={refLastBlock}
+								style={{ opacity: opacityForBlock(progress, 3) }}
+							>
+								In 2025, I was commissioned by a curator at the Kyoto Art Museum
+								to design exhibition catalogues, posters and promotional materials,
+								expanding my practice into editorial and cultural design.
+							</div>
 						</div>
 					</div>
 
-					<div className='space-y-4'>
-						<div className={sidebarTitleClass}>Tools</div>
+					{/* ===== Right: Skills / Tools ===== */}
+					<div className='col-span-12 mt-14 lg:col-span-3 lg:mt-0'>
+						{/* 竖线：只在大屏显示，位置=右栏左边界 */}
+						<div className='pointer-events-none absolute top-0 hidden h-full w-px bg-white/10 dark:bg-black/10 lg:block left-[calc(75%+2rem)]' />
 
-						<div className='flex flex-wrap gap-x-4 gap-y-2 text-[12px] leading-[1.65] opacity-65'>
-							<span>Adobe Illustrator</span>
-							<span>Adobe Photoshop</span>
-							<span>Adobe InDesign</span>
-							<span>Adobe Experience Design</span>
-							<span>Adobe Premiere Pro</span>
-							<span>Figma</span>
-							<span>Sketch</span>
-							<span>Procreate</span>
-							<span>Rhino</span>
-							<span>KeyShot</span>
-							<span>Blender</span>
-							<span>C4D</span>
-							<span>Midjourney</span>
-							<span>Google Gemini</span>
-							<span>Python (Creative Coding)</span>
+						<div
+							ref={refSkills}
+							className='hidden lg:block'
+							style={{ top: skillsTop, position: 'relative' }}
+						>
+							{/* ✅ Skills/Tools 间距更紧凑：space-y-7 */}
+							<div className='w-[260px] space-y-7'>
+								<div className='space-y-3'>
+									<div className={sidebarTitleClass}>Skills</div>
+
+									<div className='space-y-2 text-[10px] leading-[1.45] opacity-70'>
+										<div>Brand Strategy &amp; Positioning</div>
+										<div>Visual Identity System Design</div>
+										<div>Graphic Design</div>
+										<div>Print &amp; Publication Design</div>
+										<div>Digital Design &amp; E-commerce Design</div>
+										<div>3D Modelling &amp; Rendering</div>
+										<div>AI Image Generation</div>
+									</div>
+								</div>
+
+								<div className='space-y-3'>
+									<div className={sidebarTitleClass}>Tools</div>
+
+									<div className='flex flex-wrap gap-x-4 gap-y-2 text-[10px] leading-[1.65] opacity-65'>
+										<span>Adobe Illustrator</span>
+										<span>Adobe Photoshop</span>
+										<span>Adobe InDesign</span>
+										<span>Adobe Experience Design</span>
+										<span>Adobe Premiere Pro</span>
+										<span>Figma</span>
+										<span>Sketch</span>
+										<span>Procreate</span>
+										<span>Rhino</span>
+										<span>KeyShot</span>
+										<span>Blender</span>
+										<span>C4D</span>
+										<span>Midjourney</span>
+										<span>Google Gemini</span>
+										<span>Python (Creative Coding)</span>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			</div>
 
-			{/* ===== 中间正文 ===== */}
-			<div className='mx-auto flex w-full max-w-[900px] flex-col items-center px-10 pt-28 pb-24 font-medium leading-[1.75] text-[clamp(1.05rem,1.05vw,1.45rem)]'>
-				{/* ✅ 控制段落宽度：2–3 行节奏 */}
-				<div className='max-w-[42rem] mx-auto space-y-16 text-center'>
-					<div style={{ opacity: opacityForBlock(progress, 0) }}>
-						Since 2019, I have worked independently as a freelance designer,
-						collaborating with over 100 companies to develop e-commerce design
-						solutions across platforms such as Amazon and TikTok.
-					</div>
-
-					<div style={{ opacity: opacityForBlock(progress, 1) }}>
-						By combining structured visual systems with strategic thinking, I
-						have helped brands enhance engagement, visibility and conversion
-						performance.
-					</div>
-
-					<div style={{ opacity: opacityForBlock(progress, 2) }}>
-						In addition to digital commerce design, I provide product modelling
-						and 3D visualisation, as well as brand strategy support,
-						strengthening product presentation and overall brand experience.
-					</div>
-
-					<div ref={refLastBlock} style={{ opacity: opacityForBlock(progress, 3) }}>
-						In 2025, I was commissioned by a curator at the Kyoto Art Museum
-						to design exhibition catalogues, posters and promotional materials,
-						expanding my practice into editorial and cultural design.
+						{/* 小屏不显示右侧栏：你原本就是 hidden lg:block */}
 					</div>
 				</div>
 			</div>
