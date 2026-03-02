@@ -53,51 +53,45 @@ export default function Contact() {
 	return (
 		<section
 			id='contact'
-			className='min-h-screen w-full bg-white text-black dark:bg-black dark:text-white flex items-center scroll-mt-28 overflow-x-hidden'
+			className='min-h-screen w-screen bg-white text-black dark:bg-black dark:text-white flex items-center scroll-mt-28'
 		>
-			{/* ✅ 手机上下排，md 以上左右排 */}
-			<div className='w-full px-6 md:px-28 xl:px-40 flex flex-col md:flex-row md:justify-between gap-16 md:gap-x-24'>
-
-				{/* ===== LEFT ===== */}
+			{/* ✅ 手机上下排 / 桌面左右排 */}
+			<div className='w-full px-6 md:px-28 xl:px-40 flex flex-col md:flex-row md:justify-between gap-y-16 md:gap-y-0 md:gap-x-24 py-20'>
+				{/* LEFT */}
 				<div className='max-w-[520px] shrink-0'>
 					<h1 className='text-[clamp(1.8rem,2.2vw,2.4rem)] uppercase tracking-[0.28em] font-medium'>
 						Contact Me
 					</h1>
 
+					{/* ✅ View CV 只它有下划线 */}
 					<Link
 						href='/cv'
+						prefetch={false}
 						className='inline-block mt-8 text-[13px] uppercase tracking-[0.22em] border-b border-current pb-1 hover:opacity-60 transition-opacity'
 					>
 						View CV →
 					</Link>
 
+					{/* ✅ Email/Phone/Address：不要下划线 */}
 					<div className='mt-16 space-y-10 text-[14px] leading-[1.7]'>
 						<div className='space-y-2'>
-							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>
-								Email
-							</div>
-							<div className='break-words'>
-								xiongyixuan1006@gmail.com
-							</div>
+							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>Email</div>
+							<div className='opacity-90'>xiongyixuan1006@gmail.com</div>
 						</div>
 
 						<div className='space-y-2'>
-							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>
-								Phone
-							</div>
-							<div>+44 7436289616</div>
+							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>Phone</div>
+							<div className='opacity-90'>+44 7436289616</div>
 						</div>
 
 						<div className='space-y-2'>
-							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>
-								Address
-							</div>
-							<div>London, United Kingdom</div>
+							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>Address</div>
+							<div className='opacity-90'>London, United Kingdom</div>
 						</div>
 					</div>
 				</div>
 
-				{/* ===== RIGHT ===== */}
+				{/* RIGHT */}
 				<div className='relative w-full max-w-[520px]'>
 					<form className='flex flex-col space-y-9' onSubmit={handleSubmit}>
 						<div className='space-y-2'>
@@ -151,13 +145,16 @@ export default function Contact() {
 							/>
 						</div>
 
-						<button
-							type='submit'
-							disabled={status === 'sending'}
-							className='pt-2 text-[13px] uppercase tracking-[0.25em] hover:opacity-60 text-left disabled:opacity-40'
-						>
-							{status === 'sending' ? 'Sending…' : 'Send Message →'}
-						</button>
+						{/* ✅ 按钮下方留空：pb-10，避免手机底部手势条挡住 */}
+						<div className='pb-10'>
+							<button
+								type='submit'
+								disabled={status === 'sending'}
+								className='pt-2 text-[13px] uppercase tracking-[0.25em] hover:opacity-60 text-left disabled:opacity-40'
+							>
+								{status === 'sending' ? 'Sending…' : 'Send Message →'}
+							</button>
+						</div>
 					</form>
 
 					{/* Success card */}
@@ -179,7 +176,6 @@ export default function Contact() {
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</section>
 	);

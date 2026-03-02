@@ -10,12 +10,11 @@ type LayoutSpec = {
 function layoutSpecByIndex(index: number): LayoutSpec {
 	const mod = index % 7;
 
-	if (mod === 0) return { col: 'lg:col-span-8', minHeight: 'min-h-[520px] md:min-h-[640px]' };
-	if (mod === 1) return { col: 'lg:col-span-4', minHeight: 'min-h-[640px] md:min-h-[760px]' };
-	if (mod >= 2 && mod <= 4)
-		return { col: 'lg:col-span-4', minHeight: 'min-h-[360px] md:min-h-[420px]' };
+	if (mod === 0) return { col: 'lg:col-span-8', minHeight: 'min-h-[420px] md:min-h-[520px]' };
+	if (mod === 1) return { col: 'lg:col-span-4', minHeight: 'min-h-[520px] md:min-h-[620px]' };
+	if (mod >= 2 && mod <= 4) return { col: 'lg:col-span-4', minHeight: 'min-h-[300px] md:min-h-[380px]' };
 
-	return { col: 'lg:col-span-6', minHeight: 'min-h-[440px] md:min-h-[520px]' };
+	return { col: 'lg:col-span-6', minHeight: 'min-h-[360px] md:min-h-[460px]' };
 }
 
 export default function OtherDesignPage() {
@@ -33,7 +32,7 @@ export default function OtherDesignPage() {
 				<div />
 			</div>
 
-			<div className='mt-10 flex items-baseline gap-10 md:gap-12'>
+			<div className='mt-10 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12'>
 				<h1 className='text-[22px] md:text-[26px] uppercase tracking-[0.25em] font-medium opacity-80 text-black dark:text-white'>
 					Other Design
 				</h1>
@@ -43,18 +42,17 @@ export default function OtherDesignPage() {
 				</p>
 			</div>
 
-			<div className='mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
+			<div className='mt-8 md:mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
 
-			<div className='mt-16 md:mt-20 grid grid-cols-1 gap-x-16 gap-y-20 md:gap-y-24 lg:gap-y-28 lg:grid-cols-12'>
+			{/* ✅ gap 缩小：手机更紧凑 */}
+			<div className='mt-12 md:mt-16 grid grid-cols-1 gap-x-10 gap-y-14 md:gap-x-14 md:gap-y-18 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-24'>
 				{otherWorks.map((work, index) => {
 					const spec = layoutSpecByIndex(index);
-					const thumbSrc = work.cover;
-
 					return (
 						<div key={work.id} className={spec.col}>
 							<div className={`relative w-full overflow-hidden ${spec.minHeight}`}>
 								<Image
-									src={thumbSrc}
+									src={work.cover}
 									alt={work.title}
 									fill
 									sizes='(min-width: 1024px) 90vw, 100vw'
@@ -68,7 +66,7 @@ export default function OtherDesignPage() {
 			</div>
 
 			{otherWorks.length === 0 && (
-				<div className='mt-20 text-[14px] text-gray-500 dark:text-gray-400'>
+				<div className='mt-16 text-[14px] text-gray-500 dark:text-gray-400'>
 					No images in this category yet.
 				</div>
 			)}

@@ -1,5 +1,3 @@
-// app/components/work/works.tsx
-
 import Image from 'next/image';
 import Link from 'next/link';
 import { workTiles } from './workTiles';
@@ -55,14 +53,17 @@ export default function Works() {
 				</div>
 			</div>
 
-			{/* ✅ full-bleed without w-screen overflow */}
-			<div className='mt-24 relative left-1/2 -translate-x-1/2 w-[100vw] overflow-hidden'>
+			{/* marquee: mobile smaller + add more bottom space */}
+			<div className='mt-20 md:mt-24 w-screen overflow-hidden pb-10 md:pb-16'>
 				<div className='marquee'>
 					<div className='marquee__track'>
 						{[...recentWorkImages, ...recentWorkImages].map((item, index) => (
 							<div
 								key={`${item.src}-${index}`}
-								className='relative h-[190px] w-[338px] flex-none overflow-hidden bg-black/20 dark:bg-white/10'
+								className='relative flex-none overflow-hidden bg-black/20 dark:bg-white/10
+									h-[140px] w-[250px]
+									sm:h-[160px] sm:w-[285px]
+									md:h-[190px] md:w-[338px]'
 							>
 								<Image src={item.src} alt={item.alt} fill className='object-contain' />
 							</div>

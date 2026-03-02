@@ -1,3 +1,4 @@
+// app/projects/projects.tsx
 'use client';
 
 import Image from 'next/image';
@@ -13,7 +14,7 @@ export default function ProjectsList({
 }) {
 	const selected: CategoryFilter = activeCategory ?? 'all';
 
-	// ✅ All 页不展示 other（你原本就是这样）
+	// ✅ All 页不展示 other
 	const visibleWorks = works.filter((work) => work.category !== 'other');
 
 	const filteredWorks =
@@ -21,7 +22,7 @@ export default function ProjectsList({
 			? visibleWorks
 			: visibleWorks.filter((work) => work.category === selected);
 
-	// ✅ 修复：All 不统计 other
+	// ✅ 关键：All 的数量也不算 other
 	const counts = {
 		all: visibleWorks.length,
 		brand: works.filter((w) => w.category === 'brand').length,
@@ -53,6 +54,7 @@ export default function ProjectsList({
 						<Link
 							key={tab.value}
 							href={tab.href}
+							prefetch={false}
 							className={[
 								'rounded-full border px-4 py-2 text-sm transition-all',
 								isActive
@@ -73,7 +75,7 @@ export default function ProjectsList({
 					const detailHref = `/projects/detail/${slugOrId}`;
 
 					return (
-						<Link key={work.id} href={detailHref} className='group block'>
+						<Link key={work.id} href={detailHref} prefetch={false} className='group block'>
 							<div className='relative w-full aspect-[16/9] overflow-hidden'>
 								<Image
 									src={work.cover}
@@ -96,7 +98,7 @@ export default function ProjectsList({
 
 							<div className='mt-3 flex flex-wrap gap-x-3 gap-y-2 text-sm text-gray-600 dark:text-gray-400'>
 								{work.year && <span>{work.year}</span>}
-								{work.tags?.map((tag: string) => (
+								{work.tags?.map((tag) => (
 									<span key={tag}>{tag}</span>
 								))}
 							</div>
