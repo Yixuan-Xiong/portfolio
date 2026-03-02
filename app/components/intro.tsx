@@ -17,6 +17,7 @@ export default function Intro() {
 		[],
 	);
 
+	// ✅ 让“滚到中间就变黑”：用视口中线参与计算（和你之前手感一致）
 	const computeLayout = useCallback(() => {
 		const containerEl = refContainer.current;
 		if (!containerEl) return;
@@ -24,8 +25,14 @@ export default function Intro() {
 		const scrollY = window.scrollY || 0;
 		const { clientHeight, offsetTop } = containerEl;
 
+		const screenH = window.innerHeight;
+		const halfH = screenH / 2;
+
 		const percentY =
-			Math.min(clientHeight, Math.max(0, scrollY - offsetTop)) / clientHeight;
+			Math.min(
+				clientHeight + halfH,
+				Math.max(-screenH, scrollY - offsetTop) + halfH,
+			) / clientHeight;
 
 		const numOfPages = 4;
 
@@ -40,7 +47,6 @@ export default function Intro() {
 	useEffect(() => {
 		const update = () => {
 			if (rafRef.current) return;
-
 			rafRef.current = window.requestAnimationFrame(() => {
 				rafRef.current = null;
 				computeLayout();
@@ -48,7 +54,6 @@ export default function Intro() {
 		};
 
 		computeLayout();
-
 		window.addEventListener('scroll', update, { passive: true });
 		window.addEventListener('resize', update);
 
@@ -65,8 +70,9 @@ export default function Intro() {
 			id='intro'
 			className='relative z-10 bg-black text-white dark:bg-white dark:text-black'
 		>
-			<div className='mx-auto w-full max-w-[1400px] px-6 py-20 md:px-10 md:py-28 lg:px-16'>
-				<div className='grid grid-cols-12 gap-x-16'>
+			{/* ✅ 手机端别给太大上下 padding，避免“显示不全” */}
+			<div className='mx-auto w-full max-w-[1400px] px-6 py-16 md:px-10 md:py-24 lg:px-16'>
+				<div className='grid grid-cols-12 items-stretch gap-x-16'>
 					{/* ===== Left Title ===== */}
 					<div className='col-span-12 lg:col-span-3'>
 						<h2 className='text-[18px] uppercase tracking-[0.32em] font-medium opacity-75'>
@@ -76,111 +82,114 @@ export default function Intro() {
 
 					{/* ===== Middle Content ===== */}
 					<div className='col-span-12 mt-10 lg:col-span-6 lg:mt-0'>
-						<div className='space-y-16 font-medium leading-[1.75] text-[clamp(1rem,1.05vw,1.4rem)]'>
+						{/* ✅ 手机端字号略收、段落间距收一点，避免挤出屏幕 */}
+						<div className='space-y-12 md:space-y-16 font-medium leading-[1.75] text-[clamp(0.98rem,1.05vw,1.4rem)]'>
 							<div style={{ opacity: opacityForBlock(progress, 0) }}>
-								Since 2019, I have worked independently as a freelance designer,
-								collaborating with over 100 companies to develop e-commerce
-								design solutions across platforms such as Amazon and TikTok.
+								Since 2019, I have worked as a freelance designer.
+								<br className='hidden md:block' />I collaborate with brands
+								across Amazon and TikTok.
 							</div>
 
 							<div style={{ opacity: opacityForBlock(progress, 1) }}>
-								By combining structured visual systems with strategic thinking,
-								I have helped brands enhance engagement, visibility and
-								conversion performance.
+								I combine structured visual systems with strategic thinking.
+								<br className='hidden md:block' />
+								This helps improve engagement and conversion.
 							</div>
 
 							<div style={{ opacity: opacityForBlock(progress, 2) }}>
-								In addition to digital commerce design, I provide product
-								modelling and 3D visualisation, as well as brand strategy
-								support, strengthening product presentation and overall brand
-								experience.
+								I also create 3D modelling and product visualisation.
+								<br className='hidden md:block' />I support brand direction and
+								overall experience.
 							</div>
 
 							<div style={{ opacity: opacityForBlock(progress, 3) }}>
-								In 2025, I was commissioned by a curator at the Kyoto Art Museum
-								to design exhibition catalogues, posters and promotional
-								materials, expanding my practice into editorial and cultural
-								design.
+								In 2025, I designed materials for Kyoto Art Museum.
+								<br className='hidden md:block' />
+								This expanded my work into editorial and culture projects.
 							</div>
 						</div>
 
-						{/* ================= MOBILE Skills / Tools ================= */}
-						<div className='mt-16 lg:hidden space-y-10'>
-							<div>
-								<div className='text-[11px] uppercase tracking-[0.35em] opacity-50 mb-4'>
-									Skills
+						{/* ================= MOBILE Skills / Tools（更省空间，分配更协调） ================= */}
+						<div className='mt-12 lg:hidden'>
+							<div className='space-y-8'>
+								<div>
+									<div className='text-[11px] uppercase tracking-[0.35em] opacity-50 mb-3'>
+										Skills
+									</div>
+
+									{/* ✅ 更短词、更紧凑 */}
+									<div className='flex flex-wrap gap-2 text-[10.5px] leading-none'>
+										{[
+											'Brand',
+											'Identity',
+											'Graphic',
+											'Editorial',
+											'Digital',
+											'E-commerce',
+											'3D',
+											'AI',
+										].map((item) => (
+											<span
+												key={item}
+												className='px-3 py-1 rounded-full border border-white/20 dark:border-black/20 opacity-70'
+											>
+												{item}
+											</span>
+										))}
+									</div>
 								</div>
 
-								<div className='flex flex-wrap gap-2 text-[11px]'>
-									{[
-										'Brand Strategy',
-										'Visual Identity',
-										'Graphic Design',
-										'Print Design',
-										'Digital Design',
-										'3D Modelling',
-										'AI Image',
-									].map((item) => (
-										<span
-											key={item}
-											className='px-3 py-1 border border-white/20 dark:border-black/20 rounded-full opacity-70'
-										>
-											{item}
-										</span>
-									))}
-								</div>
-							</div>
+								<div>
+									<div className='text-[11px] uppercase tracking-[0.35em] opacity-50 mb-3'>
+										Tools
+									</div>
 
-							<div>
-								<div className='text-[11px] uppercase tracking-[0.35em] opacity-50 mb-4'>
-									Tools
-								</div>
-
-								<div className='flex flex-wrap gap-2 text-[11px]'>
-									{[
-										'Illustrator',
-										'Photoshop',
-										'InDesign',
-										'Figma',
-										'Blender',
-										'Rhino',
-										'Midjourney',
-										'Python',
-									].map((tool) => (
-										<span
-											key={tool}
-											className='px-3 py-1 border border-white/20 dark:border-black/20 rounded-full opacity-65'
-										>
-											{tool}
-										</span>
-									))}
+									<div className='flex flex-wrap gap-2 text-[10.5px] leading-none'>
+										{[
+											'AI',
+											'Figma',
+											'Ps',
+											'Ai',
+											'Id',
+											'Blender',
+											'Rhino',
+											'KeyShot',
+										].map((tool) => (
+											<span
+												key={tool}
+												className='px-3 py-1 rounded-full border border-white/20 dark:border-black/20 opacity-65'
+											>
+												{tool}
+											</span>
+										))}
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 
-					{/* ================= DESKTOP Right Sidebar ================= */}
+					{/* ================= DESKTOP Right Sidebar（底部对齐） ================= */}
 					<div className='hidden lg:block col-span-3 relative'>
 						<div className='absolute top-0 left-0 h-full w-px bg-white/10 dark:bg-black/10' />
 
-						<div className='pl-10'>
-							<div className='mx-auto w-[240px] space-y-8'>
+						<div className='h-full pl-10 flex flex-col justify-end'>
+							<div className='mx-auto w-[240px] space-y-7'>
 								<div>
 									<div className={sidebarTitleClass}>Skills</div>
-									<div className='mt-4 space-y-2 text-[10px] opacity-70'>
-										<div>Brand Strategy & Positioning</div>
+									<div className='mt-4 space-y-2 text-[10px] opacity-70 leading-[1.5]'>
+										<div>Brand Strategy &amp; Positioning</div>
 										<div>Visual Identity System Design</div>
 										<div>Graphic Design</div>
-										<div>Print & Publication Design</div>
-										<div>Digital Design & E-commerce</div>
-										<div>3D Modelling & Rendering</div>
+										<div>Print &amp; Publication Design</div>
+										<div>Digital Design &amp; E-commerce</div>
+										<div>3D Modelling &amp; Rendering</div>
 										<div>AI Image Generation</div>
 									</div>
 								</div>
 
 								<div>
 									<div className={sidebarTitleClass}>Tools</div>
-									<div className='mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[10px] opacity-65'>
+									<div className='mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[10px] opacity-65 leading-[1.6]'>
 										<span>Illustrator</span>
 										<span>Photoshop</span>
 										<span>InDesign</span>
@@ -195,6 +204,7 @@ export default function Intro() {
 							</div>
 						</div>
 					</div>
+					{/* ================= /DESKTOP Right Sidebar ================= */}
 				</div>
 			</div>
 		</section>
