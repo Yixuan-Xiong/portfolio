@@ -63,19 +63,24 @@ export default function OtherDesignPage() {
 
 			<div className='mt-8 md:mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
 
-			{/* ===== Grid ===== */}
-			<div className='mt-14 md:mt-20 grid grid-cols-1 gap-x-10 gap-y-12 md:gap-x-16 md:gap-y-20 lg:grid-cols-12'>
+			{/* ===== Grid =====
+			   手机：统一间距 + 统一高度（aspect 4:5）
+			   桌面：恢复你原来的 Swiss 拼贴节奏（lg:grid-cols-12 + minHeight）
+			*/}
+			<div className='mt-14 md:mt-20 grid grid-cols-1 gap-x-10 gap-y-12 md:gap-x-16 md:gap-y-20 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-28'>
 				{otherWorks.map((work, index) => {
 					const spec = layoutSpecByIndex(index);
 
 					return (
 						<div key={work.id} className={spec.col}>
-							{/* 
-								手机端：aspect-[4/5] 完全统一高度
-								桌面端：恢复 Swiss 拼贴 minHeight
-							*/}
 							<div
-								className={`relative w-full overflow-hidden aspect-[4/5] ${spec.minHeight}`}
+								className={[
+									'relative w-full overflow-hidden',
+									// ✅ 仅手机端锁定比例；lg 以上恢复自由高度（不影响 Swiss 拼贴）
+									'aspect-[4/5] lg:aspect-auto',
+									// ✅ 仅 lg 以上用你原来的 minHeight
+									spec.minHeight,
+								].join(' ')}
 							>
 								<Image
 									src={work.cover}

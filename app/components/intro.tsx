@@ -71,7 +71,7 @@ export default function Intro() {
 			id='intro'
 			className='relative z-10 bg-black text-white dark:bg-white dark:text-black'
 		>
-			{/* ✅ 手机端：更克制的 padding，避免“显示不全” */}
+			{/* 手机端 padding 克制，避免“显示不全” */}
 			<div className='mx-auto w-full max-w-[1400px] px-5 py-14 sm:px-6 sm:py-16 md:px-10 md:py-24 lg:px-16'>
 				<div className='grid grid-cols-12 items-stretch gap-x-16'>
 					{/* ===== Left Title ===== */}
@@ -83,8 +83,21 @@ export default function Intro() {
 
 					{/* ===== Middle Content ===== */}
 					<div className='col-span-12 mt-9 lg:col-span-6 lg:mt-0'>
-						{/* ✅ 手机端每行更短：限制宽度 + 平衡换行 + 允许断词 */}
-						<div className='max-w-[36rem] md:max-w-[42rem] space-y-11 md:space-y-16 font-medium leading-[1.75] text-[clamp(0.98rem,1.05vw,1.4rem)] break-words [text-wrap:balance]'>
+						{/* ✅ 手机端防溢出：max-w + anywhere 断词（不改文案） */}
+						<div
+							className={[
+								// 行宽控制：手机更窄，桌面恢复
+								'mx-auto lg:mx-0',
+								'max-w-[34rem] sm:max-w-[36rem] md:max-w-[42rem]',
+								// 段落间距：手机略紧
+								'space-y-11 md:space-y-16',
+								'font-medium leading-[1.75]',
+								// 手机字号略小，避免挤出屏幕；桌面保持你之前的 clamp
+								'text-[15px] sm:text-[16px] md:text-[clamp(0.98rem,1.05vw,1.4rem)]',
+								// ✅ 关键：任何长词都允许断行，绝不溢出右边
+								'break-words [overflow-wrap:anywhere]',
+							].join(' ')}
+						>
 							<div style={{ opacity: opacityForBlock(progress, 0) }}>
 								Since 2019, I have worked independently as a freelance designer,
 								collaborating with over 100 companies to develop e-commerce
@@ -112,16 +125,16 @@ export default function Intro() {
 							</div>
 						</div>
 
-						{/* ================= MOBILE Skills / Tools ================= */}
+						{/* ================= MOBILE Skills / Tools（接在正文下面） ================= */}
 						<div className='mt-12 lg:hidden'>
-							<div className='space-y-8'>
+							<div className='mx-auto max-w-[34rem] sm:max-w-[36rem] space-y-8'>
 								<div>
 									<div className='text-[11px] uppercase tracking-[0.35em] opacity-50 mb-3'>
 										Skills
 									</div>
 
-									{/* ✅ 手机端：tag 宽度更克制，自动换行更均匀（但不改文案） */}
-									<div className='max-w-[36rem] flex flex-wrap gap-2 text-[11px] leading-[1.2] opacity-80 [text-wrap:balance]'>
+									{/* ✅ tags：允许断行 + anywhere，保证不溢出 */}
+									<div className='flex flex-wrap gap-2 text-[11px] leading-[1.15] opacity-80 break-words [overflow-wrap:anywhere]'>
 										{[
 											'Brand Strategy & Positioning',
 											'Visual Identity System Design',
@@ -146,7 +159,7 @@ export default function Intro() {
 										Tools
 									</div>
 
-									<div className='max-w-[36rem] flex flex-wrap gap-2 text-[11px] leading-[1.2] opacity-75 [text-wrap:balance]'>
+									<div className='flex flex-wrap gap-2 text-[11px] leading-[1.15] opacity-75 break-words [overflow-wrap:anywhere]'>
 										{[
 											'Adobe Illustrator',
 											'Adobe Photoshop',
@@ -181,7 +194,7 @@ export default function Intro() {
 					<div className='hidden lg:block col-span-3 relative'>
 						<div className='absolute top-0 left-0 h-full w-px bg-white/10 dark:bg-black/10' />
 
-						{/* ✅ 底部对齐：与中间正文底部对齐（和你要的一样） */}
+						{/* ✅ 底部对齐：与中间正文底部对齐 */}
 						<div className='h-full pl-10 flex flex-col justify-end'>
 							<div className='mx-auto w-[240px] space-y-7'>
 								<div>

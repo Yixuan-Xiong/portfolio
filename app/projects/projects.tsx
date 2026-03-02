@@ -72,7 +72,7 @@ export default function ProjectsList({
 							href={tab.href}
 							prefetch={false}
 							className={[
-								'rounded-full border px-3 py-1.5 text-[11px] md:px-4 md:py-2 md:text-sm',
+								'rounded-full border px-3 py-1.5 text-[11px] md:px-4 md:py-2 md:text-sm transition-all',
 								isActive
 									? 'border-black text-black dark:border-white dark:text-white'
 									: 'border-black/20 text-gray-600 hover:text-black dark:border-white/20 dark:text-gray-400 dark:hover:text-white',
@@ -108,24 +108,26 @@ export default function ProjectsList({
 								/>
 							</div>
 
-							<div className='mt-8 flex items-start justify-between'>
-								<h3 className='text-2xl md:text-3xl font-medium tracking-tight text-black dark:text-white'>
+							{/* ✅ 标题/右侧 View：改回更克制的字号 */}
+							<div className='mt-7 flex items-start justify-between'>
+								<h3 className='text-[clamp(1.15rem,1.4vw,1.55rem)] font-medium tracking-tight text-black dark:text-white'>
 									{work.title}
 								</h3>
 
-								<span className='text-lg text-gray-500 opacity-0 transition-all duration-300 group-hover:opacity-100 dark:text-gray-400'>
+								<span className='text-[13px] uppercase tracking-[0.2em] text-gray-400 opacity-0 transition-all duration-300 group-hover:opacity-100 dark:text-gray-400'>
 									View →
 								</span>
 							</div>
 
-							<div className='mt-3 flex flex-wrap gap-x-3 gap-y-2 text-sm text-gray-600 dark:text-gray-400'>
+							{/* ✅ tags：改回更小、更轻 */}
+							<div className='mt-3 flex flex-wrap gap-x-3 gap-y-2 text-[13px] leading-[1.7] text-gray-500 dark:text-gray-400 opacity-80'>
 								{work.year && <span>{work.year}</span>}
 								{work.tags?.map((tag) => (
 									<span key={tag}>{tag}</span>
 								))}
 							</div>
 
-							<div className='mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
+							<div className='mt-9 h-px w-full bg-black/10 dark:bg-white/10' />
 						</Link>
 					);
 				})}
