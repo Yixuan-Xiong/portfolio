@@ -17,7 +17,7 @@ export default function Intro() {
 		[],
 	);
 
-	// ✅ 让“滚到中间就变黑”：用视口中线参与计算（和你之前手感一致）
+	// ✅ 滚到屏幕中线就变黑（你原来的手感）
 	const computeLayout = useCallback(() => {
 		const containerEl = refContainer.current;
 		if (!containerEl) return;
@@ -47,6 +47,7 @@ export default function Intro() {
 	useEffect(() => {
 		const update = () => {
 			if (rafRef.current) return;
+
 			rafRef.current = window.requestAnimationFrame(() => {
 				rafRef.current = null;
 				computeLayout();
@@ -70,8 +71,8 @@ export default function Intro() {
 			id='intro'
 			className='relative z-10 bg-black text-white dark:bg-white dark:text-black'
 		>
-			{/* ✅ 手机端别给太大上下 padding，避免“显示不全” */}
-			<div className='mx-auto w-full max-w-[1400px] px-6 py-16 md:px-10 md:py-24 lg:px-16'>
+			{/* ✅ 手机端：更克制的 padding，避免“显示不全” */}
+			<div className='mx-auto w-full max-w-[1400px] px-5 py-14 sm:px-6 sm:py-16 md:px-10 md:py-24 lg:px-16'>
 				<div className='grid grid-cols-12 items-stretch gap-x-16'>
 					{/* ===== Left Title ===== */}
 					<div className='col-span-12 lg:col-span-3'>
@@ -81,35 +82,37 @@ export default function Intro() {
 					</div>
 
 					{/* ===== Middle Content ===== */}
-					<div className='col-span-12 mt-10 lg:col-span-6 lg:mt-0'>
-						{/* ✅ 手机端字号略收、段落间距收一点，避免挤出屏幕 */}
-						<div className='space-y-12 md:space-y-16 font-medium leading-[1.75] text-[clamp(0.98rem,1.05vw,1.4rem)]'>
+					<div className='col-span-12 mt-9 lg:col-span-6 lg:mt-0'>
+						{/* ✅ 手机端每行更短：限制宽度 + 平衡换行 + 允许断词 */}
+						<div className='max-w-[36rem] md:max-w-[42rem] space-y-11 md:space-y-16 font-medium leading-[1.75] text-[clamp(0.98rem,1.05vw,1.4rem)] break-words [text-wrap:balance]'>
 							<div style={{ opacity: opacityForBlock(progress, 0) }}>
-								Since 2019, I have worked as a freelance designer.
-								<br className='hidden md:block' />I collaborate with brands
-								across Amazon and TikTok.
+								Since 2019, I have worked independently as a freelance designer,
+								collaborating with over 100 companies to develop e-commerce
+								design solutions across platforms such as Amazon and TikTok.
 							</div>
 
 							<div style={{ opacity: opacityForBlock(progress, 1) }}>
-								I combine structured visual systems with strategic thinking.
-								<br className='hidden md:block' />
-								This helps improve engagement and conversion.
+								By combining structured visual systems with strategic thinking,
+								I have helped brands enhance engagement, visibility and
+								conversion performance..
 							</div>
 
 							<div style={{ opacity: opacityForBlock(progress, 2) }}>
-								I also create 3D modelling and product visualisation.
-								<br className='hidden md:block' />I support brand direction and
-								overall experience.
+								In addition to digital commerce design, I provide product
+								modelling and 3D visualisation, as well as brand strategy
+								support, strengthening product presentation and overall brand
+								experience.
 							</div>
 
 							<div style={{ opacity: opacityForBlock(progress, 3) }}>
-								In 2025, I designed materials for Kyoto Art Museum.
-								<br className='hidden md:block' />
-								This expanded my work into editorial and culture projects.
+								In 2025, I was commissioned by a curator at the Kyoto Art Museum
+								to design exhibition catalogues, posters and promotional
+								materials, expanding my practice into editorial and cultural
+								design.
 							</div>
 						</div>
 
-						{/* ================= MOBILE Skills / Tools（更省空间，分配更协调） ================= */}
+						{/* ================= MOBILE Skills / Tools ================= */}
 						<div className='mt-12 lg:hidden'>
 							<div className='space-y-8'>
 								<div>
@@ -117,21 +120,20 @@ export default function Intro() {
 										Skills
 									</div>
 
-									{/* ✅ 更短词、更紧凑 */}
-									<div className='flex flex-wrap gap-2 text-[10.5px] leading-none'>
+									{/* ✅ 手机端：tag 宽度更克制，自动换行更均匀（但不改文案） */}
+									<div className='max-w-[36rem] flex flex-wrap gap-2 text-[11px] leading-[1.2] opacity-80 [text-wrap:balance]'>
 										{[
-											'Brand',
-											'Identity',
-											'Graphic',
-											'Editorial',
-											'Digital',
-											'E-commerce',
-											'3D',
-											'AI',
+											'Brand Strategy & Positioning',
+											'Visual Identity System Design',
+											'Graphic Design',
+											'Print & Publication Design',
+											'Digital Design & E-commerce Design',
+											'3D Modelling & Rendering',
+											'AI Image Generation',
 										].map((item) => (
 											<span
 												key={item}
-												className='px-3 py-1 rounded-full border border-white/20 dark:border-black/20 opacity-70'
+												className='px-3 py-1 rounded-full border border-white/20 dark:border-black/20'
 											>
 												{item}
 											</span>
@@ -144,20 +146,27 @@ export default function Intro() {
 										Tools
 									</div>
 
-									<div className='flex flex-wrap gap-2 text-[10.5px] leading-none'>
+									<div className='max-w-[36rem] flex flex-wrap gap-2 text-[11px] leading-[1.2] opacity-75 [text-wrap:balance]'>
 										{[
-											'AI',
+											'Adobe Illustrator',
+											'Adobe Photoshop',
+											'Adobe InDesign',
+											'Adobe Experience Design',
+											'Adobe Premiere Pro',
 											'Figma',
-											'Ps',
-											'Ai',
-											'Id',
-											'Blender',
+											'Sketch',
+											'Procreate',
 											'Rhino',
 											'KeyShot',
+											'Blender',
+											'C4D',
+											'Midjourney',
+											'Google Gemini',
+											'Python (Creative Coding)',
 										].map((tool) => (
 											<span
 												key={tool}
-												className='px-3 py-1 rounded-full border border-white/20 dark:border-black/20 opacity-65'
+												className='px-3 py-1 rounded-full border border-white/20 dark:border-black/20'
 											>
 												{tool}
 											</span>
@@ -168,10 +177,11 @@ export default function Intro() {
 						</div>
 					</div>
 
-					{/* ================= DESKTOP Right Sidebar（底部对齐） ================= */}
+					{/* ================= DESKTOP Right Sidebar ================= */}
 					<div className='hidden lg:block col-span-3 relative'>
 						<div className='absolute top-0 left-0 h-full w-px bg-white/10 dark:bg-black/10' />
 
+						{/* ✅ 底部对齐：与中间正文底部对齐（和你要的一样） */}
 						<div className='h-full pl-10 flex flex-col justify-end'>
 							<div className='mx-auto w-[240px] space-y-7'>
 								<div>
@@ -181,7 +191,7 @@ export default function Intro() {
 										<div>Visual Identity System Design</div>
 										<div>Graphic Design</div>
 										<div>Print &amp; Publication Design</div>
-										<div>Digital Design &amp; E-commerce</div>
+										<div>Digital Design &amp; E-commerce Design</div>
 										<div>3D Modelling &amp; Rendering</div>
 										<div>AI Image Generation</div>
 									</div>
@@ -190,15 +200,21 @@ export default function Intro() {
 								<div>
 									<div className={sidebarTitleClass}>Tools</div>
 									<div className='mt-4 flex flex-wrap gap-x-4 gap-y-2 text-[10px] opacity-65 leading-[1.6]'>
-										<span>Illustrator</span>
-										<span>Photoshop</span>
-										<span>InDesign</span>
+										<span>Adobe Illustrator</span>
+										<span>Adobe Photoshop</span>
+										<span>Adobe InDesign</span>
+										<span>Adobe Experience Design</span>
+										<span>Adobe Premiere Pro</span>
 										<span>Figma</span>
 										<span>Sketch</span>
+										<span>Procreate</span>
 										<span>Rhino</span>
+										<span>KeyShot</span>
 										<span>Blender</span>
+										<span>C4D</span>
 										<span>Midjourney</span>
-										<span>Python</span>
+										<span>Google Gemini</span>
+										<span>Python (Creative Coding)</span>
 									</div>
 								</div>
 							</div>
