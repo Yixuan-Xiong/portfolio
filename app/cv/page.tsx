@@ -45,7 +45,7 @@ export default function CVPage() {
 
 			{/* ===== CV Images (No gap, smaller width) ===== */}
 			<div className="mt-14">
-				<div className="mx-auto w-full max-w-[780px]">
+				<div className="mx-auto w-full max-w-[980px] space-y-3">
 					{cvPages.map((page, index) => (
 						<Image
 							key={page.src}

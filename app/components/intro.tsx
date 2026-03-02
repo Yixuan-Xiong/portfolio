@@ -100,7 +100,7 @@ export default function Intro() {
 						</h2>
 					</div>
 
-					{/* ===== Middle: Text ===== */}
+					{/* ===== Middle: Text (left aligned) ===== */}
 					<div className='col-span-12 mt-14 lg:col-span-6 lg:mt-0'>
 						<div className='max-w-[42rem] space-y-16 font-medium leading-[1.75] text-[clamp(1.05rem,1.05vw,1.45rem)]'>
 							<div style={{ opacity: opacityForBlock(progress, 0) }}>
@@ -134,16 +134,17 @@ export default function Intro() {
 
 					{/* ===== Right: Skills / Tools ===== */}
 					<div className='col-span-12 mt-14 lg:col-span-3 lg:mt-0'>
-						{/* 竖线：只在大屏显示，位置=右栏左边界 */}
-						<div className='pointer-events-none absolute top-0 hidden h-full w-px bg-white/10 dark:bg-black/10 lg:block left-[calc(75%+2rem)]' />
+						{/* ✅ 竖线：只在大屏显示，略往左推一点 + 留出右栏呼吸 */}
+						<div className='pointer-events-none absolute top-0 hidden h-full w-px bg-white/10 dark:bg-black/10 lg:block left-[calc(75%+1rem)]' />
 
+						{/* ✅ 右栏整体往右靠一点（不要挤在竖线边上） */}
 						<div
 							ref={refSkills}
-							className='hidden lg:block'
+							className='hidden lg:block pl-8'
 							style={{ top: skillsTop, position: 'relative' }}
 						>
-							{/* ✅ Skills/Tools 间距更紧凑：space-y-7 */}
-							<div className='w-[260px] space-y-7'>
+							{/* ✅ Skills/Tools 间距更紧凑 */}
+							<div className='w-[260px] space-y-6'>
 								<div className='space-y-3'>
 									<div className={sidebarTitleClass}>Skills</div>
 
