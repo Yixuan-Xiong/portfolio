@@ -17,10 +17,10 @@ export default function Intro() {
 
 	const rafRef = useRef<number | null>(null);
 
-	// ✅ Sidebar 标题：和中间正文同字号（但保持 uppercase + tracking）
+	// ✅ Sidebar 标题：整体更小（像注释），但保持 uppercase + tracking
 	const sidebarTitleClass = useMemo(
 		() =>
-			'text-[clamp(0.95rem,0.9vw,1.25rem)] uppercase tracking-[0.38em] font-medium opacity-70',
+			'text-[12px] uppercase tracking-[0.38em] font-medium opacity-60',
 		[]
 	);
 
@@ -99,7 +99,7 @@ export default function Intro() {
 			</div>
 
 			{/* ===== 竖线 ===== */}
-			<div className='pointer-events-none absolute top-0 z-10 hidden lg:block h-full w-px bg-white/10 dark:bg-black/10 right-[calc(2.5rem+280px+2.5rem)]' />
+			<div className='pointer-events-none absolute top-0 z-10 hidden lg:block h-full w-px bg-white/10 dark:bg-black/10 right-[calc(2.5rem+260px+2.5rem)]' />
 
 			{/* ===== 右侧 Skills / Tools ===== */}
 			<div
@@ -107,12 +107,12 @@ export default function Intro() {
 				className='pointer-events-none absolute right-10 z-20 hidden lg:block'
 				style={{ top: skillsTop }}
 			>
-				<div className='w-[280px] space-y-10'>
-					<div className='space-y-5'>
+				<div className='w-[260px] space-y-10'>
+					<div className='space-y-4'>
 						<div className={sidebarTitleClass}>Skills</div>
 
-						{/* ✅ 内容：比正文小一档 */}
-						<div className='space-y-2 text-[13px] leading-[1.45] opacity-80'>
+						{/* ✅ 内容：更小、更轻（像脚注） */}
+						<div className='space-y-2 text-[12px] leading-[1.45] opacity-70'>
 							<div>Brand Strategy &amp; Positioning</div>
 							<div>Visual Identity System Design</div>
 							<div>Graphic Design</div>
@@ -123,11 +123,10 @@ export default function Intro() {
 						</div>
 					</div>
 
-					<div className='space-y-5'>
+					<div className='space-y-4'>
 						<div className={sidebarTitleClass}>Tools</div>
 
-						{/* ✅ 内容：比正文小一档 */}
-						<div className='flex flex-wrap gap-x-4 gap-y-2 text-[13px] leading-[1.65] opacity-75'>
+						<div className='flex flex-wrap gap-x-4 gap-y-2 text-[12px] leading-[1.65] opacity-65'>
 							<span>Adobe Illustrator</span>
 							<span>Adobe Photoshop</span>
 							<span>Adobe InDesign</span>
@@ -149,8 +148,8 @@ export default function Intro() {
 			</div>
 
 			{/* ===== 中间正文 ===== */}
-			<div className='mx-auto flex max-w-[1050px] flex-col justify-start px-10 pt-28 pb-24 font-medium leading-[1.75] text-[clamp(0.95rem,0.9vw,1.25rem)]'>
-				{/* ✅ 控制段落宽度：让每段大概 2–3 行 */}
+			<div className='mx-auto flex max-w-[1050px] flex-col justify-start px-10 pt-28 pb-24 font-medium leading-[1.75] text-[clamp(1.05rem,1.05vw,1.45rem)]'>
+				{/* ✅ 控制段落宽度：2–3 行节奏 */}
 				<div className='max-w-[40rem] space-y-16'>
 					<div style={{ opacity: opacityForBlock(progress, 0) }}>
 						Since 2019, I have worked independently as a freelance designer,

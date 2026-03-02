@@ -35,7 +35,7 @@ export default async function WorkDetailPage({
 			<div className='flex items-center justify-between'>
 				<Link
 					href={`/projects/${work.category}`}
-					className='text-xl text-gray-400 hover:text-black dark:hover:text-white transition-colors'
+					className='text-lg text-gray-400 hover:text-black dark:hover:text-white transition-colors'
 				>
 					← Back
 				</Link>

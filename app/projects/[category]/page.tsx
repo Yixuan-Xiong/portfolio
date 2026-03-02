@@ -45,7 +45,7 @@ export default async function CategoryPage({
 				<div className='flex items-center justify-between'>
 					<Link
 						href='/'
-						className='text-xl text-gray-400 hover:text-white transition-colors'
+						className='text-lg text-gray-400 hover:text-white transition-colors'
 					>
 						← Home
 					</Link>
