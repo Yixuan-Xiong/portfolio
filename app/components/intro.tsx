@@ -1,72 +1,180 @@
 'use client';
 
-import { useLenis } from 'lenis/dist/lenis-react';
-import { useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, useCallback } from 'react';
 
 function opacityForBlock(sectionProgress: number, blockNumber: number) {
 	const progress = sectionProgress - blockNumber;
-
-	if (progress >= 0 && progress < 1) {
-		return 1;
-	}
-
-	return 0.2;
+	return progress >= 0 && progress < 1 ? 1 : 0.2;
 }
 
 export default function Intro() {
-	const [scrollY, setScrollY] = useState(0);
-
-	useLenis(({ scroll }) => {
-		setScrollY(scroll);
-	});
+	const [skillsTop, setSkillsTop] = useState(0);
+	const [progress, setProgress] = useState(0);
 
 	const refContainer = useRef<HTMLDivElement>(null);
-	const numOfPages = 3;
-	let progress = 0;
-	const { current: elContainer } = refContainer;
+	const refLastBlock = useRef<HTMLDivElement>(null);
+	const refSkills = useRef<HTMLDivElement>(null);
 
-	if (elContainer) {
-		const { clientHeight, offsetTop } = elContainer;
+	const rafRef = useRef<number | null>(null);
+
+	const sidebarTitleClass = useMemo(
+		() => 'text-[14px] uppercase tracking-[0.35em] font-medium opacity-75',
+		[]
+	);
+
+	const computeLayout = useCallback(() => {
+		const containerEl = refContainer.current;
+		if (!containerEl) return;
+
+		const scrollY = window.scrollY || 0;
+
+		const { clientHeight, offsetTop } = containerEl;
 		const screenH = window.innerHeight;
 		const halfH = screenH / 2;
 
 		const percentY =
 			Math.min(
 				clientHeight + halfH,
-				Math.max(-screenH, scrollY - offsetTop) + halfH,
+				Math.max(-screenH, scrollY - offsetTop) + halfH
 			) / clientHeight;
 
-		progress = Math.min(numOfPages - 0.5, Math.max(0.5, percentY * numOfPages));
-	}
+		const numOfPages = 4;
+
+		const nextProgress = Math.min(
+			numOfPages - 0.5,
+			Math.max(0.5, percentY * numOfPages)
+		);
+
+		setProgress(nextProgress);
+
+		const lastEl = refLastBlock.current;
+		const skillsEl = refSkills.current;
+		if (!lastEl || !skillsEl) return;
+
+		const containerRect = containerEl.getBoundingClientRect();
+		const lastRect = lastEl.getBoundingClientRect();
+		const skillsRect = skillsEl.getBoundingClientRect();
+
+		const lastBottom = lastRect.bottom - containerRect.top;
+		const nextSkillsTop = lastBottom - skillsRect.height;
+
+		setSkillsTop(nextSkillsTop);
+	}, []);
+
+	useEffect(() => {
+		const update = () => {
+			if (rafRef.current) return;
+
+			rafRef.current = window.requestAnimationFrame(() => {
+				rafRef.current = null;
+				computeLayout();
+			});
+		};
+
+		computeLayout();
+
+		window.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update);
+
+		return () => {
+			window.removeEventListener('scroll', update);
+			window.removeEventListener('resize', update);
+			if (rafRef.current) window.cancelAnimationFrame(rafRef.current);
+		};
+	}, [computeLayout]);
 
 	return (
 		<div
 			ref={refContainer}
-			className='relative z-10 bg-black text-white dark:bg-white  dark:text-black'
+			className='relative z-10 bg-black text-white dark:bg-white dark:text-black'
 			id='intro'
 		>
-			<div className='mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center px-10 py-24 text-4xl font-semibold tracking-tight md:py-28 md:text-6xl lg:px-20 lg:py-3 lg:text-7xl'>
-				<div className='leading-[1.15]'>
-					<div
-						className='intro-text'
-						style={{ opacity: opacityForBlock(progress, 0) }}
-					>
-						I love coding.
+			{/* ===== 左侧 About Me ===== */}
+			<div className='absolute left-12 top-32 z-20'>
+				<h2 className='text-[26px] uppercase tracking-[0.25em] font-medium opacity-80'>
+					About Me
+				</h2>
+			</div>
+
+			{/* ===== 竖线（恢复）===== */}
+			<div className='pointer-events-none absolute top-0 z-10 hidden lg:block h-full w-px bg-white/15 dark:bg-black/15 right-[calc(3rem+320px+3rem)]' />
+
+			{/* ===== 右侧 Skills / Tools ===== */}
+			<div
+				ref={refSkills}
+				className='pointer-events-none absolute right-12 z-20 hidden lg:block'
+				style={{ top: skillsTop }}
+			>
+				<div className='w-[320px] space-y-12'>
+					<div className='space-y-4'>
+						<div className={sidebarTitleClass}>Skills</div>
+
+						<div className='space-y-3 text-[16px] leading-[1.25]'>
+							<div>Brand Strategy &amp; Positioning</div>
+							<div>Visual Identity System Design</div>
+							<div>Graphic Design</div>
+							<div>Print &amp; Publication Design</div>
+							<div>Digital Design &amp; E-commerce Design</div>
+							<div>3D Modelling &amp; Rendering</div>
+							<div>AI Image Generation</div>
+						</div>
 					</div>
-					<span
-						className="intro-text inline-block after:content-['_']"
-						style={{ opacity: opacityForBlock(progress, 1) }}
+
+					<div className='space-y-4'>
+						<div className={sidebarTitleClass}>Tools</div>
+
+						<div className='flex flex-wrap gap-x-4 gap-y-3 text-[16px] leading-[1.45] opacity-85'>
+							<span>Adobe Illustrator</span>
+							<span>Adobe Photoshop</span>
+							<span>Adobe InDesign</span>
+							<span>Adobe Experience Design</span>
+							<span>Adobe Premiere Pro</span>
+							<span>Figma</span>
+							<span>Sketch</span>
+							<span>Procreate</span>
+							<span>Rhino</span>
+							<span>KeyShot</span>
+							<span>Blender</span>
+							<span>C4D</span>
+							<span>Midjourney</span>
+							<span>Google Gemini</span>
+							<span>Python (Creative Coding)</span>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			{/* ===== 中间正文 ===== */}
+			<div className='mx-auto flex max-w-6xl flex-col justify-start px-12 pt-32 pb-24 text-xl font-medium leading-[1.7] md:text-2xl lg:text-3xl'>
+				<div className='max-w-[64rem] space-y-20'>
+
+					<div style={{ opacity: opacityForBlock(progress, 0) }}>
+						Since 2019, I have worked independently as a freelance designer,
+						collaborating with over 100 companies to develop e-commerce design
+						solutions across platforms such as Amazon and TikTok.
+					</div>
+
+					<div style={{ opacity: opacityForBlock(progress, 1) }}>
+						By combining structured visual systems with strategic thinking, I
+						have helped brands enhance engagement, visibility and conversion
+						performance.
+					</div>
+
+					<div style={{ opacity: opacityForBlock(progress, 2) }}>
+						In addition to digital commerce design, I provide product modelling
+						and 3D visualisation, as well as brand strategy support,
+						strengthening product presentation and overall brand experience.
+					</div>
+
+					<div
+						ref={refLastBlock}
+						style={{ opacity: opacityForBlock(progress, 3) }}
 					>
-						I use my passion and skills to build digital products and
-						experiences.
-					</span>
-					<span
-						className='intro-text inline-block'
-						style={{ opacity: opacityForBlock(progress, 2) }}
-					>
-						I&apos;m passionate about cutting-edge, pixel perfect UI and
-						intuitively implemented UX.
-					</span>
+						In 2025, I was commissioned by a curator at the Kyoto Art Museum
+						to design exhibition catalogues, posters and promotional materials,
+						expanding my practice into editorial and cultural design.
+					</div>
+
 				</div>
 			</div>
 		</div>

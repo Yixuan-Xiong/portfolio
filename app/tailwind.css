@@ -154,3 +154,30 @@ html {
     clip-path: circle(150% at top right);
   }
 }
+
+/* ===== Small thumbnail marquee ===== */
+@keyframes marquee-x {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-50%);
+	}
+}
+
+.marquee {
+	overflow: hidden;
+}
+
+.marquee__track {
+	display: flex;
+	gap: 1.5rem;
+	width: max-content;
+	animation: marquee-x 40s linear infinite;
+	will-change: transform;
+}
+
+/* 可选：hover 暂停，不要就删掉 */
+.marquee:hover .marquee__track {
+	animation-play-state: paused;
+}

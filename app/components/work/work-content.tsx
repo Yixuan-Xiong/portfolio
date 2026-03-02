@@ -1,37 +1,42 @@
+// app/components/work/work-content.tsx
+
+import Link from 'next/link';
 import Image from 'next/image';
-import { WorkContainer } from './work-container';
-import { WorkLeft } from './work-left';
-import { WorkRight } from './work-right';
 import type { WorkTile } from './workTiles';
 
-interface WorkContentProps {
-	work: WorkTile;
-	progress?: number;
-}
-
-export default function WorkContent({ work, progress = 0 }: WorkContentProps) {
-	const { title, description, image } = work;
-
+export default function WorkContent({ work }: { work: WorkTile }) {
 	return (
-		<WorkContainer>
-			<WorkLeft progress={progress}>
-				<div className='text-2xl font-medium md:text-3xl xl:text-4xl'>
-					{description}
+		<Link
+			href={work.href}
+			className='group block h-full w-full'
+			aria-label={`View ${work.title}`}
+		>
+			<div className='flex h-full w-full flex-col justify-between'>
+				{/* 文本 */}
+				<div className='space-y-3'>
+					<p className='text-sm uppercase tracking-[0.28em] opacity-60'>
+						{work.description}
+					</p>
+					<h3 className='text-4xl font-medium tracking-tight md:text-6xl'>
+						{work.title}
+					</h3>
+					<div className='pt-4 text-xl opacity-60 transition-opacity group-hover:opacity-100'>
+						View work →
+					</div>
 				</div>
-				<span className='text-4xl font-bold tracking-tight md:text-5xl xl:text-6xl'>
-					{title}
-				</span>
-			</WorkLeft>
-			<WorkRight progress={progress}>
-				<div className='drop-shadow-2xl sm:mt-10 md:mt-24'>
+
+				{/* 封面 */}
+				<div className='relative mt-10 w-full overflow-hidden'>
 					<Image
-						src={image.src}
-						alt={title}
-						width={image.width}
-						height={image.height}
+						src={work.image.src}
+						alt={work.title}
+						width={work.image.width}
+						height={work.image.height}
+						className='h-auto w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]'
+						priority={false}
 					/>
 				</div>
-			</WorkRight>
-		</WorkContainer>
+			</div>
+		</Link>
 	);
 }

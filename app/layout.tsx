@@ -9,10 +9,10 @@ import './tailwind.css';
 
 export const metadata: Metadata = {
 	title: {
-		template: '%s | Dale Larroder',
-		default: 'Dale Larroder',
+		template: 'Yixuan Xiong',
+		default: 'Yixuan Xiong',
 	},
-	description: 'I build things for the web.',
+	description: 'My Portfolio',
 	metadataBase: new URL('https://dalelarroder.com'),
 };
 
