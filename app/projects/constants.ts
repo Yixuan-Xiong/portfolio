@@ -51,6 +51,17 @@ export const works: Work[] = [
 	// =========================
 	// BRAND
 	// =========================
+	
+	{
+		id: 'brand-d',
+		title: 'Pickleball Sports',
+		year: '2026',
+		category: 'brand',
+		cover: '/static/images/works/8.jpg',
+		detailImages: ['/static/images/details/picpals.jpg'],
+		href: '/projects/detail/brand-d',
+		tags: ['Brand', 'Logo', 'Packaging', '3D', 'Poster', 'Brochure'],
+	},
 	{
 		id: 'brand-a',
 		title: '山岛 SHAND Perfume',
@@ -60,16 +71,6 @@ export const works: Work[] = [
 		detailImages: ['/static/images/details/山岛.jpg'],
 		href: '/projects/detail/brand-a',
 		tags: ['Brand', 'Logo', 'Typography', 'Packaging', '3D', 'Poster'],
-	},
-	{
-		id: 'brand-b',
-		title: 'Share Coffee',
-		year: '2023',
-		category: 'brand',
-		cover: '/static/images/works/6.jpg',
-		detailImages: ['/static/images/details/share.jpg'],
-		href: '/projects/detail/brand-b',
-		tags: ['Brand', 'Logo', 'Packaging'],
 	},
 	{
 		id: 'brand-c',
@@ -82,63 +83,24 @@ export const works: Work[] = [
 		tags: ['Brand', 'Logo', 'Packaging', '3D', 'Poster'],
 	},
 	{
-		id: 'brand-d',
-		title: 'Pickleball Sports',
-		year: '2026',
+		id: 'brand-b',
+		title: 'Share Coffee',
+		year: '2024',
 		category: 'brand',
-		cover: '/static/images/works/8.jpg',
-		detailImages: ['/static/images/details/picpals.jpg'],
-		href: '/projects/detail/brand-d',
-		tags: ['Brand', 'Logo', 'Packaging', '3D', 'Poster', 'Brochure'],
+		cover: '/static/images/works/6.jpg',
+		detailImages: ['/static/images/details/share.jpg'],
+		href: '/projects/detail/brand-b',
+		tags: ['Brand', 'Logo', 'Packaging'],
 	},
+
 
 	// =========================
 	// WEB
 	// =========================
 	{
-		id: 'web-a',
-		title: 'Amazon — Coffee Table',
-		year: '2024',
-		category: 'web',
-		cover: '/static/images/works/1.jpg',
-		detailImages: ['/static/images/details/1.jpg'],
-		href: '/projects/detail/web-a',
-		tags: ['E-commerce', '3D', 'AI'],
-	},
-	{
-		id: 'web-b',
-		title: 'Amazon — Bedside Table',
-		year: '2025',
-		category: 'web',
-		cover: '/static/images/works/2.jpg',
-		detailImages: ['/static/images/details/2.jpg'],
-		href: '/projects/detail/web-b',
-		tags: ['E-commerce', '3D', 'AI'],
-	},
-	{
-		id: 'web-c',
-		title: 'Amazon — HEADSET Earbud',
-		year: '2024',
-		category: 'web',
-		cover: '/static/images/works/3.jpg',
-		detailImages: ['/static/images/details/3.jpg'],
-		href: '/projects/detail/web-c',
-		tags: ['E-commerce', '3D'],
-	},
-	{
-		id: 'web-d',
-		title: 'Amazon — Coffee Machine',
-		year: '2025',
-		category: 'web',
-		cover: '/static/images/works/4.jpg',
-		detailImages: ['/static/images/details/4.jpg'],
-		href: '/projects/detail/web-d',
-		tags: ['E-commerce', '3D', 'AI', 'Photography'],
-	},
-	{
 		id: 'web-e',
 		title: 'Northgrain Furniture Website',
-		year: '2024',
+		year: '2025',
 		category: 'web',
 		cover: '/static/images/works/9.jpg',
 		detailImages: [
@@ -151,6 +113,50 @@ export const works: Work[] = [
 		href: '/projects/detail/web-e',
 		tags: ['E-commerce', 'Web design', 'UI Design'],
 	},
+	{
+		id: 'web-d',
+		title: 'Amazon — Coffee Machine',
+		year: '2025',
+		category: 'web',
+		cover: '/static/images/works/4.jpg',
+		detailImages: ['/static/images/details/4.jpg'],
+		href: '/projects/detail/web-d',
+		tags: ['E-commerce', '3D', 'AI', 'Photography'],
+	},
+	{
+		id: 'web-c',
+		title: 'Amazon — HEADSET Earbud',
+		year: '2025',
+		category: 'web',
+		cover: '/static/images/works/3.jpg',
+		detailImages: ['/static/images/details/3.jpg'],
+		href: '/projects/detail/web-c',
+		tags: ['E-commerce', '3D'],
+	},
+	{
+		id: 'web-b',
+		title: 'Amazon — Bedside Table',
+		year: '2025',
+		category: 'web',
+		cover: '/static/images/works/2.jpg',
+		detailImages: ['/static/images/details/2.jpg'],
+		href: '/projects/detail/web-b',
+		tags: ['E-commerce', '3D', 'AI'],
+	},
+	{
+		id: 'web-a',
+		title: 'Amazon — Coffee Table',
+		year: '2024',
+		category: 'web',
+		cover: '/static/images/works/1.jpg',
+		detailImages: ['/static/images/details/1.jpg'],
+		href: '/projects/detail/web-a',
+		tags: ['E-commerce', '3D', 'AI'],
+	},
+
+
+
+
 
 	// =========================
 	// BROCHURE

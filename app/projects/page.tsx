@@ -1,4 +1,3 @@
-// app/projects/page.tsx
 import Link from 'next/link';
 import ProjectsList from './projects';
 
@@ -8,7 +7,7 @@ export default function Page() {
 			<div className='flex items-center justify-between'>
 				<Link
 					href='/'
-					className='text-xl text-gray-400 hover:text-white transition-colors'
+					className='text-[12px] uppercase tracking-[0.25em] font-medium opacity-70 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors'
 				>
 					← Home
 				</Link>
@@ -16,16 +15,15 @@ export default function Page() {
 			</div>
 
 			<div className='mt-10 flex items-baseline gap-10'>
-				<h1 className='text-[26px] uppercase tracking-[0.25em] font-medium opacity-80'>
+				<h1 className='text-[22px] md:text-[26px] uppercase tracking-[0.25em] font-medium opacity-80 text-black dark:text-white'>
 					Projects
 				</h1>
 
-				<p className='text-lg leading-7 text-gray-500 dark:text-gray-400'>
+				<p className='text-[14px] leading-[1.7] text-gray-600 dark:text-gray-400'>
 					Explore my work by service category.
 				</p>
 			</div>
 
-			{/* ✅ All 页：不传分类 */}
 			<ProjectsList />
 		</div>
 	);

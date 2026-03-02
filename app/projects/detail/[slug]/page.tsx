@@ -1,4 +1,3 @@
-// app/projects/detail/[slug]/page.tsx
 import Link from 'next/link';
 import Image from 'next/image';
 import { notFound } from 'next/navigation';
@@ -14,48 +13,40 @@ export default async function WorkDetailPage({
 	const work = works.find((w) => w.id === slug);
 	if (!work) notFound();
 
-	if (!work.detailImages || work.detailImages.length === 0) {
-		notFound();
-	}
+	if (!work.detailImages || work.detailImages.length === 0) notFound();
 
-	// ✅ 只用 year + tags 生成标题下方信息
 	const introText =
 		[
 			work.year ? String(work.year) : null,
-			Array.isArray(work.tags) && work.tags.length > 0
-				? work.tags.join(' · ')
-				: null,
+			Array.isArray(work.tags) && work.tags.length > 0 ? work.tags.join(' · ') : null,
 		]
 			.filter(Boolean)
 			.join(' · ') || '';
 
 	return (
 		<div className='w-full px-8 pt-8 md:px-12 md:pt-10 lg:px-16'>
-			{/* 顶部栏：Back */}
 			<div className='flex items-center justify-between'>
 				<Link
 					href={`/projects/${work.category}`}
-					className='text-lg text-gray-400 hover:text-black dark:hover:text-white transition-colors'
+					className='text-[12px] uppercase tracking-[0.25em] font-medium opacity-70 text-gray-500 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors'
 				>
 					← Back
 				</Link>
 				<div />
 			</div>
 
-			{/* 标题区 */}
 			<div className='mt-10'>
-				<h1 className='text-3xl md:text-4xl font-medium tracking-tight text-black dark:text-white'>
+				<h1 className='text-[22px] md:text-[28px] font-medium tracking-tight text-black dark:text-white'>
 					{work.title}
 				</h1>
 
 				{introText && (
-					<p className='mt-4 max-w-3xl text-lg leading-7 text-gray-600 dark:text-gray-400'>
+					<p className='mt-4 max-w-3xl text-[14px] leading-[1.7] text-gray-600 dark:text-gray-400'>
 						{introText}
 					</p>
 				)}
 			</div>
 
-			{/* 图片展示区 */}
 			<div className='mt-14 w-full'>
 				<div className='mx-auto w-full max-w-7xl'>
 					{work.detailImages.map((src, index) => (
@@ -77,7 +68,5 @@ export default async function WorkDetailPage({
 }
 
 export function generateStaticParams() {
-	return works.map((w) => ({
-		slug: w.id,
-	}));
+	return works.map((w) => ({ slug: w.id }));
 }

@@ -148,9 +148,9 @@ export default function Intro() {
 			</div>
 
 			{/* ===== 中间正文 ===== */}
-			<div className='mx-auto flex max-w-[1050px] flex-col justify-start px-10 pt-28 pb-24 font-medium leading-[1.75] text-[clamp(1.05rem,1.05vw,1.45rem)]'>
+			<div className='mx-auto flex w-full max-w-[900px] flex-col items-center px-10 pt-28 pb-24 font-medium leading-[1.75] text-[clamp(1.05rem,1.05vw,1.45rem)]'>
 				{/* ✅ 控制段落宽度：2–3 行节奏 */}
-				<div className='max-w-[40rem] space-y-16'>
+				<div className='max-w-[42rem] mx-auto space-y-16 text-center'>
 					<div style={{ opacity: opacityForBlock(progress, 0) }}>
 						Since 2019, I have worked independently as a freelance designer,
 						collaborating with over 100 companies to develop e-commerce design

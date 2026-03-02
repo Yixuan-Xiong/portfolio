@@ -20,7 +20,7 @@ export default function WorkContent({ work }: { work: WorkTile }) {
 					<h3 className='text-4xl font-medium tracking-tight md:text-6xl'>
 						{work.title}
 					</h3>
-					<div className='pt-4 text-xl opacity-60 transition-opacity group-hover:opacity-100'>
+					<div className='pt-4 text-lg opacity-60 transition-opacity group-hover:opacity-100'>
 						View work →
 					</div>
 				</div>
