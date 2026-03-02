@@ -13,20 +13,25 @@ function layoutSpecByIndex(index: number): LayoutSpec {
 	if (mod === 0)
 		return {
 			col: 'lg:col-span-8',
-			minHeight: 'min-h-[420px] md:min-h-[520px]',
+			minHeight: 'lg:min-h-[420px] xl:min-h-[520px]',
 		};
+
 	if (mod === 1)
 		return {
 			col: 'lg:col-span-4',
-			minHeight: 'min-h-[520px] md:min-h-[620px]',
+			minHeight: 'lg:min-h-[520px] xl:min-h-[620px]',
 		};
+
 	if (mod >= 2 && mod <= 4)
 		return {
 			col: 'lg:col-span-4',
-			minHeight: 'min-h-[300px] md:min-h-[380px]',
+			minHeight: 'lg:min-h-[300px] xl:min-h-[380px]',
 		};
 
-	return { col: 'lg:col-span-6', minHeight: 'min-h-[360px] md:min-h-[460px]' };
+	return {
+		col: 'lg:col-span-6',
+		minHeight: 'lg:min-h-[360px] xl:min-h-[460px]',
+	};
 }
 
 export default function OtherDesignPage() {
@@ -34,6 +39,7 @@ export default function OtherDesignPage() {
 
 	return (
 		<div className='w-full px-6 pt-8 md:px-12 md:pt-10 lg:px-16'>
+			{/* ===== Back ===== */}
 			<div className='flex items-center justify-between'>
 				<Link
 					href='/projects'
@@ -44,6 +50,7 @@ export default function OtherDesignPage() {
 				<div />
 			</div>
 
+			{/* ===== Title ===== */}
 			<div className='mt-10 flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12'>
 				<h1 className='text-[22px] md:text-[26px] uppercase tracking-[0.25em] font-medium opacity-80 text-black dark:text-white'>
 					Other Design
@@ -56,14 +63,19 @@ export default function OtherDesignPage() {
 
 			<div className='mt-8 md:mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
 
-			{/* ✅ gap 缩小：手机更紧凑 */}
-			<div className='mt-14 md:mt-20 grid grid-cols-1 gap-x-10 gap-y-14 md:gap-x-16 md:gap-y-24 lg:grid-cols-12'>
+			{/* ===== Grid ===== */}
+			<div className='mt-14 md:mt-20 grid grid-cols-1 gap-x-10 gap-y-12 md:gap-x-16 md:gap-y-20 lg:grid-cols-12'>
 				{otherWorks.map((work, index) => {
 					const spec = layoutSpecByIndex(index);
+
 					return (
 						<div key={work.id} className={spec.col}>
+							{/* 
+								手机端：aspect-[4/5] 完全统一高度
+								桌面端：恢复 Swiss 拼贴 minHeight
+							*/}
 							<div
-								className={`relative w-full overflow-hidden ${spec.minHeight}`}
+								className={`relative w-full overflow-hidden aspect-[4/5] ${spec.minHeight}`}
 							>
 								<Image
 									src={work.cover}
@@ -79,6 +91,7 @@ export default function OtherDesignPage() {
 				})}
 			</div>
 
+			{/* ===== Empty ===== */}
 			{otherWorks.length === 0 && (
 				<div className='mt-16 text-[14px] text-gray-500 dark:text-gray-400'>
 					No images in this category yet.

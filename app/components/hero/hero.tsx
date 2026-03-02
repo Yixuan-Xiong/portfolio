@@ -2,12 +2,17 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import SplashCursor from '../splash-cursor';
 import ArrowDown from './arrow-down';
 
 export default function Hero() {
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+	const scrollToTop = () => {
+		setMobileMenuOpen(false);
+		window.scrollTo({ top: 0, behavior: 'smooth' });
+	};
 
 	const handleScrollToContact = () => {
 		setMobileMenuOpen(false);
@@ -23,48 +28,75 @@ export default function Hero() {
 
 	const closeMobile = () => setMobileMenuOpen(false);
 
+	// ✅ 打开菜单时禁止页面滚动（手机体验更稳）
+	useEffect(() => {
+		if (!mobileMenuOpen) return;
+		const original = document.body.style.overflow;
+		document.body.style.overflow = 'hidden';
+		return () => {
+			document.body.style.overflow = original;
+		};
+	}, [mobileMenuOpen]);
+
 	return (
 		<main className='relative w-full overflow-x-hidden'>
-			<SplashCursor containerClassName='w-full' usePrimaryColors={true}>
+			<SplashCursor containerClassName='w-full' usePrimaryColors>
 				<div className='relative min-h-svh'>
 					{/* ================= TOP NAV ================= */}
 					<nav
-						className='fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-6 md:px-28 md:py-8
-						bg-white/70 text-black backdrop-blur dark:bg-black/40 dark:text-white'
+						className={[
+							'fixed top-0 left-0 right-0 z-40',
+							'flex items-center justify-between',
+							'px-6 py-6 md:px-28 md:py-8',
+							'bg-white/70 text-black backdrop-blur',
+							'dark:bg-black/40 dark:text-white',
+						].join(' ')}
 						data-skip-splash-cursor
 					>
-						{/* Left */}
-						<div className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
+						{/* Left: Logo / Home */}
+						<button
+							type='button'
+							onClick={scrollToTop}
+							className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75 hover:opacity-50 transition-opacity'
+							aria-label='Back to top'
+						>
 							Yixuan Xiong
-						</div>
+						</button>
 
-						{/* Desktop menu */}
+						{/* Right: Desktop menu */}
 						<div className='hidden md:flex items-center gap-10'>
-							<Link href='/' className={navItemClass}>
+							<button
+								type='button'
+								onClick={scrollToTop}
+								className={navItemClass}
+							>
 								Home
-							</Link>
+							</button>
+
 							<Link href='/projects' className={navItemClass}>
 								Projects
 							</Link>
+
 							<Link href='/cv' className={navItemClass} prefetch={false}>
 								CV
 							</Link>
+
 							<button
 								type='button'
 								onClick={handleScrollToContact}
 								className={navItemClass}
-								data-skip-splash-cursor
 							>
 								Contact
 							</button>
 						</div>
 
-						{/* Mobile hamburger ONLY */}
-						<div className='md:hidden flex items-center'>
+						{/* ✅ Mobile: hamburger（在最右侧按钮的“左边”留位置，避免和明暗切换重叠）
+              你明暗切换按钮如果固定在右上角最右侧，这里留出 pr-10/12 的空间就不会挡住 */}
+						<div className='md:hidden flex items-center pr-10'>
 							<button
 								type='button'
 								onClick={() => setMobileMenuOpen((v) => !v)}
-								className='text-[18px] leading-none opacity-80 hover:opacity-60 transition-opacity'
+								className='text-[20px] leading-none opacity-80 hover:opacity-60 transition-opacity'
 								aria-label='Open menu'
 								data-skip-splash-cursor
 							>
@@ -73,23 +105,24 @@ export default function Hero() {
 						</div>
 					</nav>
 
-					{/* ================= MOBILE PANEL ================= */}
+					{/* ================= MOBILE MENU (Overlay + Panel) ================= */}
 					<div
 						className={[
-							'md:hidden fixed inset-0 z-40 transition-opacity',
+							'md:hidden fixed inset-0 z-50 transition-opacity',
 							mobileMenuOpen
 								? 'opacity-100 pointer-events-auto'
 								: 'opacity-0 pointer-events-none',
 						].join(' ')}
 					>
-						{/* Overlay */}
-						<div
+						{/* ✅ Overlay：用 button（a11y 合规，Biome 不会报错） */}
+						<button
+							type='button'
 							className='absolute inset-0 bg-black/70'
 							onClick={closeMobile}
-							aria-hidden='true'
+							aria-label='Close menu overlay'
 						/>
 
-						{/* Slide panel */}
+						{/* Panel */}
 						<div className='absolute right-0 top-0 h-full w-[78vw] max-w-[320px] bg-black text-white dark:bg-white dark:text-black p-6'>
 							<div className='flex items-center justify-between'>
 								<div className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
@@ -98,7 +131,7 @@ export default function Hero() {
 								<button
 									type='button'
 									onClick={closeMobile}
-									className='text-[18px] opacity-70 hover:opacity-50 transition-opacity'
+									className='text-[20px] opacity-70 hover:opacity-50 transition-opacity'
 									aria-label='Close menu'
 								>
 									×
@@ -106,13 +139,14 @@ export default function Hero() {
 							</div>
 
 							<div className='mt-10 flex flex-col gap-6'>
-								<Link
-									href='/'
+								<button
+									type='button'
+									onClick={scrollToTop}
 									className={mobilePanelItemClass}
-									onClick={closeMobile}
 								>
 									Home
-								</Link>
+								</button>
+
 								<Link
 									href='/projects'
 									className={mobilePanelItemClass}
@@ -120,6 +154,7 @@ export default function Hero() {
 								>
 									Projects
 								</Link>
+
 								<Link
 									href='/cv'
 									className={mobilePanelItemClass}
@@ -128,6 +163,7 @@ export default function Hero() {
 								>
 									CV
 								</Link>
+
 								<button
 									type='button'
 									onClick={handleScrollToContact}

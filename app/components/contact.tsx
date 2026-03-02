@@ -55,10 +55,10 @@ export default function Contact() {
 	return (
 		<section
 			id='contact'
-			className='min-h-screen w-screen bg-white text-black dark:bg-black dark:text-white flex items-center scroll-mt-28'
+			className='min-h-screen w-screen bg-white text-black dark:bg-black dark:text-white flex items-start pt-32 md:items-center md:pt-0 scroll-mt-28'
 		>
 			<div className='w-full px-6 md:px-28 xl:px-40'>
-				{/* ✅ 手机：上下；桌面：左右 */}
+				{/* 手机上下；桌面左右 */}
 				<div className='flex flex-col gap-14 md:flex-row md:justify-between md:gap-x-24'>
 					{/* LEFT */}
 					<div className='max-w-[520px] shrink-0'>
@@ -75,7 +75,7 @@ export default function Contact() {
 							View CV →
 						</Link>
 
-						{/* ✅ 手机端间距更紧：space-y-6 */}
+						{/* 手机间距更紧凑 */}
 						<div className='mt-12 space-y-6 text-[14px] leading-[1.7]'>
 							<div className='space-y-1.5'>
 								<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>
@@ -83,7 +83,7 @@ export default function Contact() {
 								</div>
 								<a
 									href='mailto:xiongyixuan1006@gmail.com'
-									className='no-underline hover:opacity-70 transition-opacity'
+									className='hover:opacity-70 transition-opacity'
 								>
 									xiongyixuan1006@gmail.com
 								</a>
@@ -95,7 +95,7 @@ export default function Contact() {
 								</div>
 								<a
 									href='tel:+447436289616'
-									className='no-underline hover:opacity-70 transition-opacity'
+									className='hover:opacity-70 transition-opacity'
 								>
 									+44 7436289616
 								</a>
@@ -164,11 +164,11 @@ export default function Contact() {
 								/>
 							</div>
 
-							{/* ✅ 给按钮下面留更多空间，避免手机点不到 */}
+							{/* 按钮下方留更大空间（手机明显） */}
 							<button
 								type='submit'
 								disabled={status === 'sending'}
-								className='pt-2 pb-6 text-[13px] uppercase tracking-[0.25em] hover:opacity-60 text-left disabled:opacity-40'
+								className='pt-2 pb-14 md:pb-6 text-[13px] uppercase tracking-[0.25em] hover:opacity-60 text-left disabled:opacity-40'
 							>
 								{status === 'sending' ? 'Sending…' : 'Send Message →'}
 							</button>
