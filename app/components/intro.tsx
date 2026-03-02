@@ -17,8 +17,10 @@ export default function Intro() {
 
 	const rafRef = useRef<number | null>(null);
 
+	// ✅ Sidebar 标题：和中间正文同字号（但保持 uppercase + tracking）
 	const sidebarTitleClass = useMemo(
-		() => 'text-[11px] uppercase tracking-[0.38em] font-medium opacity-70',
+		() =>
+			'text-[clamp(0.95rem,0.9vw,1.25rem)] uppercase tracking-[0.38em] font-medium opacity-70',
 		[]
 	);
 
@@ -105,11 +107,12 @@ export default function Intro() {
 				className='pointer-events-none absolute right-10 z-20 hidden lg:block'
 				style={{ top: skillsTop }}
 			>
-				<div className='w-[280px] space-y-9'>
-					<div className='space-y-4'>
+				<div className='w-[280px] space-y-10'>
+					<div className='space-y-5'>
 						<div className={sidebarTitleClass}>Skills</div>
 
-						<div className='space-y-2 text-[13px] leading-[1.4] opacity-85'>
+						{/* ✅ 内容：比正文小一档 */}
+						<div className='space-y-2 text-[13px] leading-[1.45] opacity-80'>
 							<div>Brand Strategy &amp; Positioning</div>
 							<div>Visual Identity System Design</div>
 							<div>Graphic Design</div>
@@ -120,10 +123,11 @@ export default function Intro() {
 						</div>
 					</div>
 
-					<div className='space-y-4'>
+					<div className='space-y-5'>
 						<div className={sidebarTitleClass}>Tools</div>
 
-						<div className='flex flex-wrap gap-x-4 gap-y-2 text-[13px] leading-[1.6] opacity-80'>
+						{/* ✅ 内容：比正文小一档 */}
+						<div className='flex flex-wrap gap-x-4 gap-y-2 text-[13px] leading-[1.65] opacity-75'>
 							<span>Adobe Illustrator</span>
 							<span>Adobe Photoshop</span>
 							<span>Adobe InDesign</span>
@@ -145,9 +149,9 @@ export default function Intro() {
 			</div>
 
 			{/* ===== 中间正文 ===== */}
-			<div className='mx-auto flex max-w-[1050px] flex-col justify-start px-10 pt-28 pb-24 font-medium leading-[1.7] text-[clamp(0.95rem,0.9vw,1.25rem)]'>
-				<div className='max-w-[58rem] space-y-14'>
-
+			<div className='mx-auto flex max-w-[1050px] flex-col justify-start px-10 pt-28 pb-24 font-medium leading-[1.75] text-[clamp(0.95rem,0.9vw,1.25rem)]'>
+				{/* ✅ 控制段落宽度：让每段大概 2–3 行 */}
+				<div className='max-w-[40rem] space-y-16'>
 					<div style={{ opacity: opacityForBlock(progress, 0) }}>
 						Since 2019, I have worked independently as a freelance designer,
 						collaborating with over 100 companies to develop e-commerce design
@@ -166,15 +170,11 @@ export default function Intro() {
 						strengthening product presentation and overall brand experience.
 					</div>
 
-					<div
-						ref={refLastBlock}
-						style={{ opacity: opacityForBlock(progress, 3) }}
-					>
+					<div ref={refLastBlock} style={{ opacity: opacityForBlock(progress, 3) }}>
 						In 2025, I was commissioned by a curator at the Kyoto Art Museum
 						to design exhibition catalogues, posters and promotional materials,
 						expanding my practice into editorial and cultural design.
 					</div>
-
 				</div>
 			</div>
 		</div>
