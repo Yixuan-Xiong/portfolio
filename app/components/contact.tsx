@@ -53,16 +53,15 @@ export default function Contact() {
 	return (
 		<section
 			id='contact'
-			className='min-h-screen w-screen bg-white text-black dark:bg-black dark:text-white flex items-center scroll-mt-28'
+			className='min-h-screen w-full bg-white text-black dark:bg-black dark:text-white flex items-center scroll-mt-28 overflow-x-hidden'
 		>
-			<div className='w-full px-16 md:px-28 xl:px-40 flex justify-between gap-x-24'>
+			<div className='w-full px-6 md:px-28 xl:px-40 flex flex-col md:flex-row gap-12 md:gap-x-24'>
 				{/* LEFT */}
-				<div className='max-w-[520px] shrink-0'>
+				<div className='max-w-none md:max-w-[520px] shrink-0'>
 					<h1 className='text-[clamp(1.8rem,2.2vw,2.4rem)] uppercase tracking-[0.28em] font-medium'>
 						Contact Me
 					</h1>
 
-					{/* ✅ View CV（跳转到 /cv） */}
 					<Link
 						href='/cv'
 						className='inline-block mt-8 text-[13px] uppercase tracking-[0.22em] border-b border-current pb-1 hover:opacity-60 transition-opacity'
@@ -70,12 +69,12 @@ export default function Contact() {
 						View CV →
 					</Link>
 
-					<div className='mt-16 space-y-10 text-[14px] leading-[1.7]'>
+					<div className='mt-12 md:mt-16 space-y-10 text-[14px] leading-[1.7]'>
 						<div className='space-y-2'>
 							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>
 								Email
 							</div>
-							<div>xiongyixuan1006@gmail.com</div>
+							<div className='break-words'>xiongyixuan1006@gmail.com</div>
 						</div>
 
 						<div className='space-y-2'>
@@ -95,7 +94,7 @@ export default function Contact() {
 				</div>
 
 				{/* RIGHT */}
-				<div className='relative w-full max-w-[520px]'>
+				<div className='relative w-full md:max-w-[520px]'>
 					<form className='flex flex-col space-y-9' onSubmit={handleSubmit}>
 						<div className='space-y-2'>
 							<label

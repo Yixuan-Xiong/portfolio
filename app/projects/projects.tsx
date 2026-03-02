@@ -6,23 +6,35 @@ import { works, type ServiceCategory } from './constants';
 
 type CategoryFilter = 'all' | ServiceCategory;
 
-export default function ProjectsList({ activeCategory }: { activeCategory?: CategoryFilter }) {
+export default function ProjectsList({
+	activeCategory,
+}: {
+	activeCategory?: CategoryFilter;
+}) {
 	const selected: CategoryFilter = activeCategory ?? 'all';
 
+	// ✅ All 页不展示 other（你原本就是这样）
 	const visibleWorks = works.filter((work) => work.category !== 'other');
 
 	const filteredWorks =
-		selected === 'all' ? visibleWorks : visibleWorks.filter((work) => work.category === selected);
+		selected === 'all'
+			? visibleWorks
+			: visibleWorks.filter((work) => work.category === selected);
 
+	// ✅ 修复：All 不统计 other
 	const counts = {
-		all: works.length,
+		all: visibleWorks.length,
 		brand: works.filter((w) => w.category === 'brand').length,
 		web: works.filter((w) => w.category === 'web').length,
 		brochure: works.filter((w) => w.category === 'brochure').length,
 		other: works.filter((w) => w.category === 'other').length,
 	};
 
-	const tabs: Array<{ label: string; value: CategoryFilter; href: string }> = [
+	const tabs: Array<{
+		label: string;
+		value: CategoryFilter;
+		href: string;
+	}> = [
 		{ label: `All (${counts.all})`, value: 'all', href: '/projects' },
 		{ label: `Brand design (${counts.brand})`, value: 'brand', href: '/projects/brand' },
 		{ label: `E-commerce / web design (${counts.web})`, value: 'web', href: '/projects/web' },
@@ -32,7 +44,7 @@ export default function ProjectsList({ activeCategory }: { activeCategory?: Cate
 
 	return (
 		<section className='mt-12'>
-			{/* Tabs */}
+			{/* ================= Tabs ================= */}
 			<div className='flex flex-wrap gap-3 border-b border-black/10 pb-8 dark:border-white/10'>
 				{tabs.map((tab) => {
 					const isActive = tab.value === selected;
@@ -42,7 +54,7 @@ export default function ProjectsList({ activeCategory }: { activeCategory?: Cate
 							key={tab.value}
 							href={tab.href}
 							className={[
-								'rounded-full border px-4 py-2 text-[12px] uppercase tracking-[0.18em] transition-all',
+								'rounded-full border px-4 py-2 text-sm transition-all',
 								isActive
 									? 'border-black text-black dark:border-white dark:text-white'
 									: 'border-black/20 text-gray-600 hover:text-black dark:border-white/20 dark:text-gray-400 dark:hover:text-white',
@@ -54,7 +66,7 @@ export default function ProjectsList({ activeCategory }: { activeCategory?: Cate
 				})}
 			</div>
 
-			{/* Works Grid */}
+			{/* ================= Works Grid ================= */}
 			<div className='mt-16 grid grid-cols-1 gap-x-16 gap-y-24 md:grid-cols-2'>
 				{filteredWorks.map((work) => {
 					const slugOrId = (work as unknown as { slug?: string }).slug ?? String(work.id);
@@ -72,24 +84,24 @@ export default function ProjectsList({ activeCategory }: { activeCategory?: Cate
 								/>
 							</div>
 
-							<div className='mt-7 flex items-start justify-between'>
-								<h3 className='text-[18px] md:text-[20px] font-medium tracking-tight text-black dark:text-white'>
+							<div className='mt-8 flex items-start justify-between'>
+								<h3 className='text-2xl md:text-3xl font-medium tracking-tight text-black dark:text-white'>
 									{work.title}
 								</h3>
 
-								<span className='text-[12px] uppercase tracking-[0.18em] text-gray-500 opacity-0 transition-all duration-300 group-hover:opacity-100 dark:text-gray-400'>
+								<span className='text-lg text-gray-500 opacity-0 transition-all duration-300 group-hover:opacity-100 dark:text-gray-400'>
 									View →
 								</span>
 							</div>
 
-							<div className='mt-3 flex flex-wrap gap-x-3 gap-y-2 text-[12px] text-gray-600 dark:text-gray-400'>
+							<div className='mt-3 flex flex-wrap gap-x-3 gap-y-2 text-sm text-gray-600 dark:text-gray-400'>
 								{work.year && <span>{work.year}</span>}
 								{work.tags?.map((tag: string) => (
 									<span key={tag}>{tag}</span>
 								))}
 							</div>
 
-							<div className='mt-9 h-px w-full bg-black/10 dark:bg-white/10' />
+							<div className='mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
 						</Link>
 					);
 				})}

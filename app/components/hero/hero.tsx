@@ -17,26 +17,35 @@ export default function Hero() {
 		<main className='relative w-screen overflow-x-hidden'>
 			<SplashCursor containerClassName='w-screen' usePrimaryColors={true}>
 				<div className='relative min-h-svh'>
-
 					{/* ===== Top Navigation ===== */}
 					<nav
-						className='absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-12 py-8 md:px-28'
+						className='absolute top-0 left-0 right-0 z-[100] pointer-events-auto flex items-center justify-between px-6 py-6 md:px-28 md:py-8'
 						data-skip-splash-cursor
 					>
 						<div className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
 							Yixuan Xiong
 						</div>
 
-						<div className='flex items-center gap-10'>
-							<Link href='/' className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
+						{/* ✅ 手机端自动换行，不会显示不全 */}
+						<div className='flex flex-wrap items-center justify-end gap-x-6 gap-y-3 md:flex-nowrap md:gap-10'>
+							<Link
+								href='/'
+								className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'
+							>
 								Home
 							</Link>
 
-							<Link href='/projects' className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
+							<Link
+								href='/projects'
+								className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'
+							>
 								Projects
 							</Link>
 
-							<Link href='/cv' className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
+							<Link
+								href='/cv'
+								className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'
+							>
 								CV
 							</Link>
 
@@ -54,12 +63,10 @@ export default function Hero() {
 					<ArrowDown />
 
 					{/* ===== Hero Content ===== */}
-					<div className='relative z-10 flex min-h-svh w-full flex-col justify-center gap-14 px-16 pt-28 pb-20 md:flex-row md:items-center md:justify-between md:px-28'>
-
+					<div className='relative z-10 flex min-h-svh w-full flex-col justify-center gap-14 px-6 pt-28 pb-20 md:px-28 md:flex-row md:items-center md:justify-between'>
 						{/* ===== Left ===== */}
 						<div className='w-full max-w-[48rem]'>
 							<div className='space-y-6'>
-
 								<h1 className='leading-relaxed opacity-70 text-[clamp(0.85rem,0.75vw,1rem)]'>
 									Welcome to my portfolio
 								</h1>
@@ -92,7 +99,7 @@ export default function Hero() {
 
 						{/* ===== Right Photo ===== */}
 						<div className='w-full md:w-auto'>
-							<div className='relative h-[340px] w-full overflow-hidden md:h-[420px] md:w-[28vw] md:max-w-[500px] md:min-w-[340px]'>
+							<div className='relative h-[320px] w-full overflow-hidden md:h-[420px] md:w-[28vw] md:max-w-[500px] md:min-w-[340px]'>
 								<Image
 									src='/profile.jpg'
 									alt='Yixuan Xiong'
@@ -104,7 +111,6 @@ export default function Hero() {
 								/>
 							</div>
 						</div>
-
 					</div>
 				</div>
 			</SplashCursor>

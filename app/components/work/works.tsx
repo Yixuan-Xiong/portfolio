@@ -16,8 +16,7 @@ const recentWorkImages = [
 export default function Works() {
 	return (
 		<section className='mt-16 md:mt-20'>
-			{/* ===== 上半部分：保持居中版心 ===== */}
-			<div className='mx-auto w-full max-w-[1680px] px-8 md:px-12 lg:px-16'>
+			<div className='mx-auto w-full max-w-[1680px] px-6 md:px-12 lg:px-16'>
 				<div className='mb-14'>
 					<h2 className='text-[18px] uppercase tracking-[0.32em] font-medium opacity-75'>
 						Recent Works
@@ -56,8 +55,8 @@ export default function Works() {
 				</div>
 			</div>
 
-			{/* ===== 下半部分：滚动从页面最左边开始（全屏宽） ===== */}
-			<div className='mt-24 w-screen overflow-hidden'>
+			{/* ✅ full-bleed without w-screen overflow */}
+			<div className='mt-24 relative left-1/2 -translate-x-1/2 w-[100vw] overflow-hidden'>
 				<div className='marquee'>
 					<div className='marquee__track'>
 						{[...recentWorkImages, ...recentWorkImages].map((item, index) => (
@@ -65,12 +64,7 @@ export default function Works() {
 								key={`${item.src}-${index}`}
 								className='relative h-[190px] w-[338px] flex-none overflow-hidden bg-black/20 dark:bg-white/10'
 							>
-								<Image
-									src={item.src}
-									alt={item.alt}
-									fill
-									className='object-contain'
-								/>
+								<Image src={item.src} alt={item.alt} fill className='object-contain' />
 							</div>
 						))}
 					</div>

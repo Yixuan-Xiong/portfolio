@@ -13,7 +13,6 @@ export default function Intro() {
 	const refContainer = useRef<HTMLDivElement>(null);
 	const rafRef = useRef<number | null>(null);
 
-	// ✅ Sidebar 标题：小一点但清晰
 	const sidebarTitleClass = useMemo(
 		() => 'text-[12px] uppercase tracking-[0.38em] font-medium opacity-60',
 		[]
@@ -70,21 +69,20 @@ export default function Intro() {
 	return (
 		<div
 			ref={refContainer}
-			className='relative z-10 bg-black text-white dark:bg-white dark:text-black'
+			className='relative z-10 bg-black text-white dark:bg-white dark:text-black overflow-x-hidden'
 			id='intro'
 		>
-			{/* ✅ 三列容器：统一间距 */}
-			<div className='mx-auto w-full max-w-[1400px] px-10 pt-28 pb-24 lg:px-16'>
-				<div className='relative grid grid-cols-12 gap-x-16'>
-					{/* ===== Left: About Me ===== */}
+			<div className='mx-auto w-full max-w-[1400px] px-6 pt-20 pb-20 md:px-10 lg:px-16 lg:pt-28 lg:pb-24'>
+				<div className='relative grid grid-cols-12 gap-x-10 lg:gap-x-16'>
+					{/* ===== Left ===== */}
 					<div className='col-span-12 lg:col-span-3'>
 						<h2 className='text-[18px] uppercase tracking-[0.32em] font-medium opacity-75'>
 							About Me
 						</h2>
 					</div>
 
-					{/* ===== Middle: Text (LEFT aligned) ===== */}
-					<div className='col-span-12 mt-14 lg:col-span-6 lg:mt-0'>
+					{/* ===== Middle ===== */}
+					<div className='col-span-12 mt-12 lg:col-span-6 lg:mt-0'>
 						<div className='max-w-[42rem] space-y-16 font-medium leading-[1.75] text-[clamp(1.05rem,1.05vw,1.45rem)]'>
 							<div style={{ opacity: opacityForBlock(progress, 0) }}>
 								Since 2019, I have worked independently as a freelance designer,
@@ -112,59 +110,53 @@ export default function Intro() {
 						</div>
 					</div>
 
-					{/* ===== Right: Skills / Tools ===== */}
-					<div className='col-span-12 mt-14 lg:col-span-3 lg:mt-0 relative'>
-						{/* ✅ 竖线：右栏最左边界 */}
-						<div className='pointer-events-none absolute top-0 hidden h-full w-px bg-white/10 dark:bg-black/10 lg:block left-0' />
+					{/* ===== Right (desktop only) ===== */}
+					<div className='col-span-12 mt-12 lg:col-span-3 lg:mt-0 relative hidden lg:flex items-end'>
+						{/* vertical line at the left edge of the right column */}
+						<div className='pointer-events-none absolute top-0 left-0 h-full w-px bg-white/10 dark:bg-black/10' />
 
-						{/* ✅ 关键：右侧内容底部对齐（与中间第4段底部一致）+ 往右移动到“竖线~右边界”的中间 */}
-						<div className='hidden lg:flex absolute bottom-0 left-0 right-0'>
-							{/* 竖线后的安全距离 */}
-							<div className='w-full pl-10'>
-								{/* ✅ 这个 mx-auto 会把整体放到：竖线到页面右边界的中间区域 */}
-								<div className='mx-auto w-[260px] space-y-6'>
-									<div className='space-y-3'>
-										<div className={sidebarTitleClass}>Skills</div>
-
-										<div className='space-y-2 text-[10px] leading-[1.45] opacity-70'>
-											<div>Brand Strategy &amp; Positioning</div>
-											<div>Visual Identity System Design</div>
-											<div>Graphic Design</div>
-											<div>Print &amp; Publication Design</div>
-											<div>Digital Design &amp; E-commerce Design</div>
-											<div>3D Modelling &amp; Rendering</div>
-											<div>AI Image Generation</div>
-										</div>
+						{/* ✅ Place content in the middle between the line and the right edge */}
+						<div className='w-full pl-10 flex justify-center'>
+							<div className='w-[260px] space-y-6'>
+								<div className='space-y-3'>
+									<div className={sidebarTitleClass}>Skills</div>
+									<div className='space-y-2 text-[10px] leading-[1.45] opacity-70'>
+										<div>Brand Strategy &amp; Positioning</div>
+										<div>Visual Identity System Design</div>
+										<div>Graphic Design</div>
+										<div>Print &amp; Publication Design</div>
+										<div>Digital Design &amp; E-commerce Design</div>
+										<div>3D Modelling &amp; Rendering</div>
+										<div>AI Image Generation</div>
 									</div>
+								</div>
 
-									{/* ✅ Skills / Tools 间距不用太大：space-y-3 + overall space-y-6 */}
-									<div className='space-y-3'>
-										<div className={sidebarTitleClass}>Tools</div>
-
-										<div className='flex flex-wrap gap-x-4 gap-y-2 text-[10px] leading-[1.65] opacity-65'>
-											<span>Adobe Illustrator</span>
-											<span>Adobe Photoshop</span>
-											<span>Adobe InDesign</span>
-											<span>Adobe Experience Design</span>
-											<span>Adobe Premiere Pro</span>
-											<span>Figma</span>
-											<span>Sketch</span>
-											<span>Procreate</span>
-											<span>Rhino</span>
-											<span>KeyShot</span>
-											<span>Blender</span>
-											<span>C4D</span>
-											<span>Midjourney</span>
-											<span>Google Gemini</span>
-											<span>Python (Creative Coding)</span>
-										</div>
+								<div className='space-y-3'>
+									<div className={sidebarTitleClass}>Tools</div>
+									<div className='flex flex-wrap gap-x-4 gap-y-2 text-[10px] leading-[1.65] opacity-65'>
+										<span>Adobe Illustrator</span>
+										<span>Adobe Photoshop</span>
+										<span>Adobe InDesign</span>
+										<span>Adobe Experience Design</span>
+										<span>Adobe Premiere Pro</span>
+										<span>Figma</span>
+										<span>Sketch</span>
+										<span>Procreate</span>
+										<span>Rhino</span>
+										<span>KeyShot</span>
+										<span>Blender</span>
+										<span>C4D</span>
+										<span>Midjourney</span>
+										<span>Google Gemini</span>
+										<span>Python (Creative Coding)</span>
 									</div>
 								</div>
 							</div>
 						</div>
-
-						{/* 小屏不显示右侧栏：保持 hidden lg:flex */}
 					</div>
+
+					{/* ✅ Mobile: you can optionally show Skills/Tools under text.
+              If you want, tell me and I’ll add a compact mobile version. */}
 				</div>
 			</div>
 		</div>
