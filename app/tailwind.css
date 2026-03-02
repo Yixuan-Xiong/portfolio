@@ -181,3 +181,22 @@ html {
 .marquee:hover .marquee__track {
 	animation-play-state: paused;
 }
+
+/* ===== Design baseline: match 67% visual scale at 100% browser zoom ===== */
+:root {
+  --site-scale: 0.67;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  transform: scale(var(--site-scale));
+  transform-origin: top left;
+  width: calc(100% / var(--site-scale));
+  height: calc(100% / var(--site-scale));
+  overflow-x: hidden;
+}
