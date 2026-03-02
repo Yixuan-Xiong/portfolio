@@ -183,20 +183,16 @@ html {
 }
 
 /* ===== Design baseline: match 67% visual scale at 100% browser zoom ===== */
-:root {
-  --site-scale: 0.67;
+/* ===== Desktop baseline to mimic ~67% browser zoom WITHOUT transform ===== */
+@media (min-width: 1024px) {
+  html {
+    /* 16px * 0.67 ≈ 10.72px */
+    font-size: 67%;
+  }
 }
 
-html,
-body {
-  width: 100%;
-  height: 100%;
-}
-
-body {
-  transform: scale(var(--site-scale));
-  transform-origin: top left;
-  width: calc(100% / var(--site-scale));
-  height: calc(100% / var(--site-scale));
-  overflow-x: hidden;
+/* keep text scaling consistent */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
