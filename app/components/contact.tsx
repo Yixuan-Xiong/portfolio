@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Contact() {
@@ -51,42 +52,41 @@ export default function Contact() {
 
 	return (
 		<section
-			id="contact"
-			className="min-h-screen w-screen bg-white text-black dark:bg-black dark:text-white flex items-center scroll-mt-28"
+			id='contact'
+			className='min-h-screen w-screen bg-white text-black dark:bg-black dark:text-white flex items-center scroll-mt-28'
 		>
-			<div className="w-full px-16 md:px-28 xl:px-40 flex justify-between gap-x-24">
-
+			<div className='w-full px-16 md:px-28 xl:px-40 flex justify-between gap-x-24'>
 				{/* LEFT */}
-				<div className="max-w-[520px] shrink-0">
-					<h1 className="text-[clamp(1.8rem,2.2vw,2.4rem)] uppercase tracking-[0.28em] font-medium">
+				<div className='max-w-[520px] shrink-0'>
+					<h1 className='text-[clamp(1.8rem,2.2vw,2.4rem)] uppercase tracking-[0.28em] font-medium'>
 						Contact Me
 					</h1>
 
-					<a
-						href="/cv/Yixuan_Xiong_CV.pdf"
-						download="Yixuan_Xiong_CV.pdf"
-						className="inline-block mt-8 text-[13px] uppercase tracking-[0.22em] border-b border-current pb-1 hover:opacity-60 transition-opacity"
+					{/* ✅ View CV（跳转到 /cv） */}
+					<Link
+						href='/cv'
+						className='inline-block mt-8 text-[13px] uppercase tracking-[0.22em] border-b border-current pb-1 hover:opacity-60 transition-opacity'
 					>
-						Download CV →
-					</a>
+						View CV →
+					</Link>
 
-					<div className="mt-16 space-y-10 text-[14px] leading-[1.7]">
-						<div className="space-y-2">
-							<div className="text-[12px] uppercase tracking-[0.25em] opacity-50">
+					<div className='mt-16 space-y-10 text-[14px] leading-[1.7]'>
+						<div className='space-y-2'>
+							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>
 								Email
 							</div>
 							<div>xiongyixuan1006@gmail.com</div>
 						</div>
 
-						<div className="space-y-2">
-							<div className="text-[12px] uppercase tracking-[0.25em] opacity-50">
+						<div className='space-y-2'>
+							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>
 								Phone
 							</div>
 							<div>+44 7436289616</div>
 						</div>
 
-						<div className="space-y-2">
-							<div className="text-[12px] uppercase tracking-[0.25em] opacity-50">
+						<div className='space-y-2'>
+							<div className='text-[12px] uppercase tracking-[0.25em] opacity-50'>
 								Address
 							</div>
 							<div>London, United Kingdom</div>
@@ -95,52 +95,63 @@ export default function Contact() {
 				</div>
 
 				{/* RIGHT */}
-				<div className="relative w-full max-w-[560px]">
-					<form className="flex flex-col space-y-10" onSubmit={handleSubmit}>
-						
-						<div className="space-y-2">
-							<label className="text-[12px] uppercase tracking-[0.25em] opacity-60">
+				<div className='relative w-full max-w-[520px]'>
+					<form className='flex flex-col space-y-9' onSubmit={handleSubmit}>
+						<div className='space-y-2'>
+							<label
+								htmlFor='contact-name'
+								className='text-[12px] uppercase tracking-[0.25em] opacity-60'
+							>
 								Name
 							</label>
 							<input
-								type="text"
+								id='contact-name'
+								type='text'
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 								required
-								className="w-full bg-transparent text-[14px] border border-current/25 px-4 py-2.5 outline-none focus:border-current/60"
+								className='w-full bg-transparent text-[14px] border border-current/25 px-4 py-2.5 outline-none focus:border-current/60'
 							/>
 						</div>
 
-						<div className="space-y-2">
-							<label className="text-[12px] uppercase tracking-[0.25em] opacity-60">
+						<div className='space-y-2'>
+							<label
+								htmlFor='contact-email'
+								className='text-[12px] uppercase tracking-[0.25em] opacity-60'
+							>
 								Email
 							</label>
 							<input
-								type="email"
+								id='contact-email'
+								type='email'
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								required
-								className="w-full bg-transparent text-[14px] border border-current/25 px-4 py-2.5 outline-none focus:border-current/60"
+								className='w-full bg-transparent text-[14px] border border-current/25 px-4 py-2.5 outline-none focus:border-current/60'
 							/>
 						</div>
 
-						<div className="space-y-2">
-							<label className="text-[12px] uppercase tracking-[0.25em] opacity-60">
+						<div className='space-y-2'>
+							<label
+								htmlFor='contact-message'
+								className='text-[12px] uppercase tracking-[0.25em] opacity-60'
+							>
 								Message
 							</label>
 							<textarea
-								rows={6}
+								id='contact-message'
+								rows={5}
 								value={message}
 								onChange={(e) => setMessage(e.target.value)}
 								required
-								className="w-full bg-transparent text-[14px] border border-current/25 px-4 py-3 outline-none resize-none focus:border-current/60"
+								className='w-full bg-transparent text-[14px] border border-current/25 px-4 py-3 outline-none resize-none focus:border-current/60'
 							/>
 						</div>
 
 						<button
-							type="submit"
+							type='submit'
 							disabled={status === 'sending'}
-							className="pt-2 text-[13px] uppercase tracking-[0.25em] hover:opacity-60 text-left disabled:opacity-40"
+							className='pt-2 text-[13px] uppercase tracking-[0.25em] hover:opacity-60 text-left disabled:opacity-40'
 						>
 							{status === 'sending' ? 'Sending…' : 'Send Message →'}
 						</button>
@@ -148,28 +159,22 @@ export default function Contact() {
 
 					{/* Success card */}
 					<div
-						className={`
-							pointer-events-none
-							absolute inset-0
-							flex items-center justify-center
-							transition-all duration-500
-							${showCard ? 'opacity-100' : 'opacity-0'}
-						`}
+						className={[
+							'pointer-events-none absolute inset-0 flex items-center justify-center transition-all duration-500',
+							showCard ? 'opacity-100' : 'opacity-0',
+						].join(' ')}
+						aria-hidden={!showCard}
 					>
 						<div
-							className={`
-								px-7 py-4
-								uppercase tracking-[0.25em] text-[12px]
-								transition-all duration-500
-								${showCard ? 'translate-y-0' : 'translate-y-3'}
-								bg-black text-white
-								dark:bg-white dark:text-black
-							`}
+							className={[
+								'px-7 py-4 uppercase tracking-[0.25em] text-[12px] transition-all duration-500',
+								showCard ? 'translate-y-0' : 'translate-y-3',
+								'bg-black text-white dark:bg-white dark:text-black',
+							].join(' ')}
 						>
 							Sent
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</section>

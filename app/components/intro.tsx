@@ -8,13 +8,9 @@ function opacityForBlock(sectionProgress: number, blockNumber: number) {
 }
 
 export default function Intro() {
-	const [skillsTop, setSkillsTop] = useState(0);
 	const [progress, setProgress] = useState(0);
 
 	const refContainer = useRef<HTMLDivElement>(null);
-	const refLastBlock = useRef<HTMLDivElement>(null);
-	const refSkills = useRef<HTMLDivElement>(null);
-
 	const rafRef = useRef<number | null>(null);
 
 	// ✅ Sidebar 标题：小一点，但清晰
@@ -47,19 +43,6 @@ export default function Intro() {
 		);
 
 		setProgress(nextProgress);
-
-		const lastEl = refLastBlock.current;
-		const skillsEl = refSkills.current;
-		if (!lastEl || !skillsEl) return;
-
-		const containerRect = containerEl.getBoundingClientRect();
-		const lastRect = lastEl.getBoundingClientRect();
-		const skillsRect = skillsEl.getBoundingClientRect();
-
-		const lastBottom = lastRect.bottom - containerRect.top;
-		const nextSkillsTop = lastBottom - skillsRect.height;
-
-		setSkillsTop(nextSkillsTop);
 	}, []);
 
 	useEffect(() => {
@@ -92,6 +75,7 @@ export default function Intro() {
 		>
 			{/* ================= Three-column Swiss container ================= */}
 			<div className='mx-auto w-full max-w-[1400px] px-10 pt-28 pb-24 lg:px-16'>
+				{/* ✅ 同一行三列：间距一致 */}
 				<div className='relative grid grid-cols-12 gap-x-16'>
 					{/* ===== Left: About Me ===== */}
 					<div className='col-span-12 lg:col-span-3'>
@@ -121,10 +105,7 @@ export default function Intro() {
 								strengthening product presentation and overall brand experience.
 							</div>
 
-							<div
-								ref={refLastBlock}
-								style={{ opacity: opacityForBlock(progress, 3) }}
-							>
+							<div style={{ opacity: opacityForBlock(progress, 3) }}>
 								In 2025, I was commissioned by a curator at the Kyoto Art Museum
 								to design exhibition catalogues, posters and promotional materials,
 								expanding my practice into editorial and cultural design.
@@ -133,16 +114,12 @@ export default function Intro() {
 					</div>
 
 					{/* ===== Right: Skills / Tools ===== */}
-					<div className='col-span-12 mt-14 lg:col-span-3 lg:mt-0'>
-						{/* ✅ 竖线：只在大屏显示，略往左推一点 + 留出右栏呼吸 */}
-						<div className='pointer-events-none absolute top-0 hidden h-full w-px bg-white/10 dark:bg-black/10 lg:block left-[calc(75%+1rem)]' />
+					<div className='col-span-12 mt-14 lg:col-span-3 lg:mt-0 relative'>
+						{/* ✅ 竖线：只在大屏显示 */}
+						<div className='pointer-events-none absolute top-0 hidden h-full w-px bg-white/10 dark:bg-black/10 lg:block left-0' />
 
-						{/* ✅ 右栏整体往右靠一点（不要挤在竖线边上） */}
-						<div
-							ref={refSkills}
-							className='hidden lg:block pl-8'
-							style={{ top: skillsTop, position: 'relative' }}
-						>
+						{/* ✅ 关键：右侧整块钉在“右栏底部”，自然与中间最后一段底对齐 */}
+						<div className='hidden lg:block absolute bottom-0 right-0 pl-10'>
 							{/* ✅ Skills/Tools 间距更紧凑 */}
 							<div className='w-[260px] space-y-6'>
 								<div className='space-y-3'>
@@ -183,7 +160,7 @@ export default function Intro() {
 							</div>
 						</div>
 
-						{/* 小屏不显示右侧栏：你原本就是 hidden lg:block */}
+						{/* 小屏不显示右侧栏：保持 hidden lg:block */}
 					</div>
 				</div>
 			</div>
