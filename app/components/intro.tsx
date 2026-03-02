@@ -71,31 +71,26 @@ export default function Intro() {
 			id='intro'
 			className='relative z-10 bg-black text-white dark:bg-white dark:text-black'
 		>
-			{/* 手机端 padding 克制，避免“显示不全” */}
 			<div className='mx-auto w-full max-w-[1400px] px-5 py-14 sm:px-6 sm:py-16 md:px-10 md:py-24 lg:px-16'>
-				<div className='grid grid-cols-12 items-stretch gap-x-16'>
+				{/* ✅ 关键：手机单列；lg 才 12 列，避免移动端被“裁掉” */}
+				<div className='grid grid-cols-1 gap-y-10 lg:grid-cols-12 lg:items-stretch lg:gap-x-16 lg:gap-y-0'>
 					{/* ===== Left Title ===== */}
-					<div className='col-span-12 lg:col-span-3'>
+					<div className='lg:col-span-3'>
 						<h2 className='text-[18px] uppercase tracking-[0.32em] font-medium opacity-75'>
 							About Me
 						</h2>
 					</div>
 
 					{/* ===== Middle Content ===== */}
-					<div className='col-span-12 mt-9 lg:col-span-6 lg:mt-0'>
-						{/* ✅ 手机端防溢出：max-w + anywhere 断词（不改文案） */}
+					<div className='lg:col-span-6 min-w-0'>
+						{/* ✅ 关键：min-w-0 + max-w-full + overflow-wrap:anywhere，绝不右侧溢出 */}
 						<div
 							className={[
-								// 行宽控制：手机更窄，桌面恢复
-								'mx-auto lg:mx-0',
-								'max-w-[34rem] sm:max-w-[36rem] md:max-w-[42rem]',
-								// 段落间距：手机略紧
+								'w-full max-w-full',
 								'space-y-11 md:space-y-16',
 								'font-medium leading-[1.75]',
-								// 手机字号略小，避免挤出屏幕；桌面保持你之前的 clamp
 								'text-[15px] sm:text-[16px] md:text-[clamp(0.98rem,1.05vw,1.4rem)]',
-								// ✅ 关键：任何长词都允许断行，绝不溢出右边
-								'break-words [overflow-wrap:anywhere]',
+								'break-words [overflow-wrap:anywhere] hyphens-auto',
 							].join(' ')}
 						>
 							<div style={{ opacity: opacityForBlock(progress, 0) }}>
@@ -125,16 +120,16 @@ export default function Intro() {
 							</div>
 						</div>
 
-						{/* ================= MOBILE Skills / Tools（接在正文下面） ================= */}
-						<div className='mt-12 lg:hidden'>
-							<div className='mx-auto max-w-[34rem] sm:max-w-[36rem] space-y-8'>
+						{/* ================= MOBILE Skills / Tools ================= */}
+						<div className='mt-12 lg:hidden min-w-0'>
+							<div className='space-y-8'>
 								<div>
 									<div className='text-[11px] uppercase tracking-[0.35em] opacity-50 mb-3'>
 										Skills
 									</div>
 
-									{/* ✅ tags：允许断行 + anywhere，保证不溢出 */}
-									<div className='flex flex-wrap gap-2 text-[11px] leading-[1.15] opacity-80 break-words [overflow-wrap:anywhere]'>
+									{/* ✅ 每个 tag 也允许断行，避免右侧被裁 */}
+									<div className='w-full max-w-full flex flex-wrap gap-2 text-[11px] leading-[1.15] opacity-80 min-w-0'>
 										{[
 											'Brand Strategy & Positioning',
 											'Visual Identity System Design',
@@ -146,7 +141,7 @@ export default function Intro() {
 										].map((item) => (
 											<span
 												key={item}
-												className='px-3 py-1 rounded-full border border-white/20 dark:border-black/20'
+												className='max-w-full whitespace-normal break-words [overflow-wrap:anywhere] px-3 py-1 rounded-full border border-white/20 dark:border-black/20'
 											>
 												{item}
 											</span>
@@ -159,7 +154,7 @@ export default function Intro() {
 										Tools
 									</div>
 
-									<div className='flex flex-wrap gap-2 text-[11px] leading-[1.15] opacity-75 break-words [overflow-wrap:anywhere]'>
+									<div className='w-full max-w-full flex flex-wrap gap-2 text-[11px] leading-[1.15] opacity-75 min-w-0'>
 										{[
 											'Adobe Illustrator',
 											'Adobe Photoshop',
@@ -179,7 +174,7 @@ export default function Intro() {
 										].map((tool) => (
 											<span
 												key={tool}
-												className='px-3 py-1 rounded-full border border-white/20 dark:border-black/20'
+												className='max-w-full whitespace-normal break-words [overflow-wrap:anywhere] px-3 py-1 rounded-full border border-white/20 dark:border-black/20'
 											>
 												{tool}
 											</span>
@@ -191,7 +186,7 @@ export default function Intro() {
 					</div>
 
 					{/* ================= DESKTOP Right Sidebar ================= */}
-					<div className='hidden lg:block col-span-3 relative'>
+					<div className='hidden lg:block lg:col-span-3 relative'>
 						<div className='absolute top-0 left-0 h-full w-px bg-white/10 dark:bg-black/10' />
 
 						{/* ✅ 底部对齐：与中间正文底部对齐 */}

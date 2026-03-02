@@ -27,25 +27,37 @@ export default function CVPage() {
 					← Home
 				</Link>
 
-				{/* ✅ 更稳定版本：新标签页打开 PDF */}
+				{/* ❌ 手机端不再在这里显示下载按钮 */}
+				<div className='hidden md:block'>
+					<a
+						href={CV_PDF_PATH}
+						target='_blank'
+						rel='noopener noreferrer'
+						className='text-[12px] uppercase tracking-[0.25em] border-b border-current pb-1 hover:opacity-60 transition-opacity'
+					>
+						Download CV →
+					</a>
+				</div>
+			</div>
+
+			{/* ===== Title + Mobile Download ===== */}
+			<div className='mt-10 flex items-center justify-between'>
+				<h1 className='text-[22px] md:text-[26px] uppercase tracking-[0.25em] font-medium opacity-80 text-black dark:text-white'>
+					CV
+				</h1>
+
+				{/* ✅ 手机端下载按钮放标题右边 */}
 				<a
 					href={CV_PDF_PATH}
 					target='_blank'
 					rel='noopener noreferrer'
-					className='text-[12px] uppercase tracking-[0.25em] border-b border-current pb-1 hover:opacity-60 transition-opacity'
-					aria-label='Download CV as PDF'
+					className='md:hidden text-[13px] uppercase tracking-[0.2em] opacity-70 hover:opacity-50 transition-opacity'
 				>
-					Download CV →
+					Download →
 				</a>
 			</div>
 
-			{/* ===== Title ===== */}
-			<div className='mt-10'>
-				<h1 className='text-[22px] md:text-[26px] uppercase tracking-[0.25em] font-medium opacity-80 text-black dark:text-white'>
-					CV
-				</h1>
-				<div className='mt-8 md:mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
-			</div>
+			<div className='mt-8 md:mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
 
 			{/* ===== CV Images ===== */}
 			<div className='mt-10 md:mt-14'>
@@ -54,7 +66,7 @@ export default function CVPage() {
 						<div
 							key={page.src}
 							className='relative w-full overflow-hidden'
-							style={{ aspectRatio: '1 / 1.414' }} // A4 比例
+							style={{ aspectRatio: '1 / 1.414' }}
 						>
 							<Image
 								src={page.src}

@@ -28,7 +28,6 @@ export default function Hero() {
 
 	const closeMobile = () => setMobileMenuOpen(false);
 
-	// ✅ 打开菜单时禁止页面滚动（手机体验更稳）
 	useEffect(() => {
 		if (!mobileMenuOpen) return;
 		const original = document.body.style.overflow;
@@ -53,7 +52,6 @@ export default function Hero() {
 						].join(' ')}
 						data-skip-splash-cursor
 					>
-						{/* Left: Logo / Home */}
 						<button
 							type='button'
 							onClick={scrollToTop}
@@ -63,7 +61,6 @@ export default function Hero() {
 							Yixuan Xiong
 						</button>
 
-						{/* Right: Desktop menu */}
 						<div className='hidden md:flex items-center gap-10'>
 							<button
 								type='button'
@@ -90,26 +87,24 @@ export default function Hero() {
 							</button>
 						</div>
 
-						{/* Mobile: hamburger */}
 						<div className='md:hidden flex items-center pr-10'>
 							<button
 								type='button'
 								onClick={() => setMobileMenuOpen((v) => !v)}
 								className='text-[20px] leading-none opacity-80 hover:opacity-60 transition-opacity'
 								aria-label='Open menu'
-								data-skip-splash-cursor
 							>
 								☰
 							</button>
 						</div>
 					</nav>
 
-					{/* ================= MOBILE MENU (Overlay + Panel) ================= */}
+					{/* ================= MOBILE MENU ================= */}
 					<div
 						className={[
 							'md:hidden fixed inset-0 transition-opacity',
-							// ✅ 关键：z-index 拉到极高，确保盖住明暗按钮
-							'z-[9999]',
+							// 🔥 极限 z-index，压住任何明暗按钮
+							'z-[2147483647]',
 							mobileMenuOpen
 								? 'opacity-100 pointer-events-auto'
 								: 'opacity-0 pointer-events-none',
@@ -123,16 +118,18 @@ export default function Hero() {
 							aria-label='Close menu overlay'
 						/>
 
-						{/* Panel：再更高一点，保证按钮永远可点 */}
-						<div className='absolute right-0 top-0 z-[10000] h-full w-[78vw] max-w-[320px] bg-black text-white dark:bg-white dark:text-black p-6'>
+						{/* Panel */}
+						<div className='absolute right-0 top-0 z-[2147483647] h-full w-[78vw] max-w-[320px] bg-black text-white dark:bg-white dark:text-black p-6'>
 							<div className='flex items-center justify-between'>
 								<div className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
 									Menu
 								</div>
+
+								{/* 🔥 关闭按钮也给最高层级 */}
 								<button
 									type='button'
 									onClick={closeMobile}
-									className='text-[20px] opacity-70 hover:opacity-50 transition-opacity'
+									className='relative z-[2147483647] text-[20px] opacity-70 hover:opacity-50 transition-opacity'
 									aria-label='Close menu'
 								>
 									×
@@ -180,7 +177,6 @@ export default function Hero() {
 
 					{/* ================= HERO CONTENT ================= */}
 					<div className='relative z-10 flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-28 pb-20 md:flex-row md:items-center md:justify-between md:px-28 md:pt-32'>
-						{/* Left */}
 						<div className='w-full max-w-[48rem]'>
 							<div className='space-y-6'>
 								<h1 className='leading-relaxed opacity-70 text-[clamp(0.85rem,0.75vw,1rem)]'>
@@ -215,7 +211,6 @@ export default function Hero() {
 							</section>
 						</div>
 
-						{/* Right Photo */}
 						<div className='w-full md:w-auto'>
 							<div className='relative h-[300px] w-full overflow-hidden md:h-[420px] md:w-[28vw] md:max-w-[500px] md:min-w-[340px]'>
 								<Image
