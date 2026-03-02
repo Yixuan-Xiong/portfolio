@@ -1,8 +1,8 @@
 'use client';
 
-import { useMemo, useState } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 import SplashCursor from '../splash-cursor';
 import ArrowDown from './arrow-down';
 
@@ -24,19 +24,21 @@ export default function Hero() {
 	const closeMobile = () => setMobileMenuOpen(false);
 
 	return (
-		<main className='relative w-screen overflow-x-hidden'>
-			<SplashCursor containerClassName='w-screen' usePrimaryColors={true}>
+		<main className='relative w-full overflow-x-hidden'>
+			<SplashCursor containerClassName='w-full' usePrimaryColors={true}>
 				<div className='relative min-h-svh'>
-					{/* ===== Top Navigation ===== */}
+					{/* ================= TOP NAV ================= */}
 					<nav
-						className='absolute top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-6 md:px-28 md:py-8'
+						className='fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-6 py-6 md:px-28 md:py-8
+						bg-white/70 text-black backdrop-blur dark:bg-black/40 dark:text-white'
 						data-skip-splash-cursor
 					>
+						{/* Left */}
 						<div className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
 							Yixuan Xiong
 						</div>
 
-						{/* Desktop nav */}
+						{/* Desktop menu */}
 						<div className='hidden md:flex items-center gap-10'>
 							<Link href='/' className={navItemClass}>
 								Home
@@ -44,7 +46,7 @@ export default function Hero() {
 							<Link href='/projects' className={navItemClass}>
 								Projects
 							</Link>
-							<Link href='/cv' className={navItemClass}>
+							<Link href='/cv' className={navItemClass} prefetch={false}>
 								CV
 							</Link>
 							<button
@@ -57,8 +59,8 @@ export default function Hero() {
 							</button>
 						</div>
 
-						{/* Mobile hamburger */}
-						<div className='md:hidden flex items-center gap-3'>
+						{/* Mobile hamburger ONLY */}
+						<div className='md:hidden flex items-center'>
 							<button
 								type='button'
 								onClick={() => setMobileMenuOpen((v) => !v)}
@@ -71,21 +73,23 @@ export default function Hero() {
 						</div>
 					</nav>
 
-					{/* Mobile menu panel */}
+					{/* ================= MOBILE PANEL ================= */}
 					<div
 						className={[
 							'md:hidden fixed inset-0 z-40 transition-opacity',
-							mobileMenuOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none',
+							mobileMenuOpen
+								? 'opacity-100 pointer-events-auto'
+								: 'opacity-0 pointer-events-none',
 						].join(' ')}
 					>
-						{/* overlay */}
+						{/* Overlay */}
 						<div
 							className='absolute inset-0 bg-black/70'
 							onClick={closeMobile}
 							aria-hidden='true'
 						/>
 
-						{/* panel */}
+						{/* Slide panel */}
 						<div className='absolute right-0 top-0 h-full w-[78vw] max-w-[320px] bg-black text-white dark:bg-white dark:text-black p-6'>
 							<div className='flex items-center justify-between'>
 								<div className='text-[11px] uppercase tracking-[0.32em] font-medium opacity-75'>
@@ -102,13 +106,26 @@ export default function Hero() {
 							</div>
 
 							<div className='mt-10 flex flex-col gap-6'>
-								<Link href='/' className={mobilePanelItemClass} onClick={closeMobile}>
+								<Link
+									href='/'
+									className={mobilePanelItemClass}
+									onClick={closeMobile}
+								>
 									Home
 								</Link>
-								<Link href='/projects' className={mobilePanelItemClass} onClick={closeMobile}>
+								<Link
+									href='/projects'
+									className={mobilePanelItemClass}
+									onClick={closeMobile}
+								>
 									Projects
 								</Link>
-								<Link href='/cv' className={mobilePanelItemClass} onClick={closeMobile} prefetch={false}>
+								<Link
+									href='/cv'
+									className={mobilePanelItemClass}
+									onClick={closeMobile}
+									prefetch={false}
+								>
 									CV
 								</Link>
 								<button
@@ -124,8 +141,8 @@ export default function Hero() {
 
 					<ArrowDown />
 
-					{/* ===== Hero Content ===== */}
-					<div className='relative z-10 flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-24 pb-20 md:flex-row md:items-center md:justify-between md:px-28'>
+					{/* ================= HERO CONTENT ================= */}
+					<div className='relative z-10 flex min-h-svh w-full flex-col justify-center gap-10 px-6 pt-28 pb-20 md:flex-row md:items-center md:justify-between md:px-28 md:pt-32'>
 						{/* Left */}
 						<div className='w-full max-w-[48rem]'>
 							<div className='space-y-6'>
@@ -134,7 +151,8 @@ export default function Hero() {
 								</h1>
 
 								<h1 className='font-medium leading-[1.05] text-[clamp(2rem,3vw,3.2rem)]'>
-									Hi, I&apos;m <span className='font-semibold'>Yixuan Xiong</span>
+									Hi, I&apos;m{' '}
+									<span className='font-semibold'>Yixuan Xiong</span>
 								</h1>
 
 								<h2 className='font-medium leading-tight opacity-85 text-[clamp(1.4rem,2vw,2.4rem)]'>
@@ -150,10 +168,11 @@ export default function Hero() {
 									</p>
 									<p>
 										My work merges aesthetic refinement with strategic thinking,
-										creating design solutions that are both visually distinctive and
-										user-driven. By integrating AI and 3D visualisation into my
-										workflow, I reimagine traditional brand and digital design
-										through more experimental and forward-looking approaches.
+										creating design solutions that are both visually distinctive
+										and user-driven. By integrating AI and 3D visualisation into
+										my workflow, I reimagine traditional brand and digital
+										design through more experimental and forward-looking
+										approaches.
 									</p>
 								</div>
 							</section>

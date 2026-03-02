@@ -27,26 +27,16 @@ export default function CVPage() {
 					← Home
 				</Link>
 
-				{/* ✅ 手机上更稳：直接打开 PDF（而不是 download） */}
+				{/* ✅ 更稳定版本：新标签页打开 PDF */}
 				<a
 					href={CV_PDF_PATH}
 					target='_blank'
-					rel='noreferrer'
+					rel='noopener noreferrer'
 					className='text-[12px] uppercase tracking-[0.25em] border-b border-current pb-1 hover:opacity-60 transition-opacity'
-					aria-label='View CV as PDF'
-				>
-					View CV PDF →
-				</a>
-
-				{/* 如果你一定要 download，把上面 a 替换成下面：
-				<a
-					href={CV_PDF_PATH}
-					download='Yixuan_Xiong_CV.pdf'
-					className='text-[12px] uppercase tracking-[0.25em] border-b border-current pb-1 hover:opacity-60 transition-opacity'
+					aria-label='Download CV as PDF'
 				>
 					Download CV →
 				</a>
-				*/}
 			</div>
 
 			{/* ===== Title ===== */}
@@ -59,14 +49,12 @@ export default function CVPage() {
 
 			{/* ===== CV Images ===== */}
 			<div className='mt-10 md:mt-14'>
-				{/* ✅ 缩小一点 + 缝隙很小 */}
 				<div className='mx-auto w-full max-w-[860px] space-y-2 md:space-y-3'>
 					{cvPages.map((page, index) => (
 						<div
 							key={page.src}
 							className='relative w-full overflow-hidden'
-							/* A4 比例接近 1 : 1.414 */
-							style={{ aspectRatio: '1 / 1.414' }}
+							style={{ aspectRatio: '1 / 1.414' }} // A4 比例
 						>
 							<Image
 								src={page.src}

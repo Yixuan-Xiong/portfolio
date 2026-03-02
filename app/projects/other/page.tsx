@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { works } from '../constants';
 
 type LayoutSpec = {
@@ -10,9 +10,21 @@ type LayoutSpec = {
 function layoutSpecByIndex(index: number): LayoutSpec {
 	const mod = index % 7;
 
-	if (mod === 0) return { col: 'lg:col-span-8', minHeight: 'min-h-[420px] md:min-h-[520px]' };
-	if (mod === 1) return { col: 'lg:col-span-4', minHeight: 'min-h-[520px] md:min-h-[620px]' };
-	if (mod >= 2 && mod <= 4) return { col: 'lg:col-span-4', minHeight: 'min-h-[300px] md:min-h-[380px]' };
+	if (mod === 0)
+		return {
+			col: 'lg:col-span-8',
+			minHeight: 'min-h-[420px] md:min-h-[520px]',
+		};
+	if (mod === 1)
+		return {
+			col: 'lg:col-span-4',
+			minHeight: 'min-h-[520px] md:min-h-[620px]',
+		};
+	if (mod >= 2 && mod <= 4)
+		return {
+			col: 'lg:col-span-4',
+			minHeight: 'min-h-[300px] md:min-h-[380px]',
+		};
 
 	return { col: 'lg:col-span-6', minHeight: 'min-h-[360px] md:min-h-[460px]' };
 }
@@ -45,12 +57,14 @@ export default function OtherDesignPage() {
 			<div className='mt-8 md:mt-10 h-px w-full bg-black/10 dark:bg-white/10' />
 
 			{/* ✅ gap 缩小：手机更紧凑 */}
-			<div className='mt-12 md:mt-16 grid grid-cols-1 gap-x-10 gap-y-14 md:gap-x-14 md:gap-y-18 lg:grid-cols-12 lg:gap-x-16 lg:gap-y-24'>
+			<div className='mt-14 md:mt-20 grid grid-cols-1 gap-x-10 gap-y-14 md:gap-x-16 md:gap-y-24 lg:grid-cols-12'>
 				{otherWorks.map((work, index) => {
 					const spec = layoutSpecByIndex(index);
 					return (
 						<div key={work.id} className={spec.col}>
-							<div className={`relative w-full overflow-hidden ${spec.minHeight}`}>
+							<div
+								className={`relative w-full overflow-hidden ${spec.minHeight}`}
+							>
 								<Image
 									src={work.cover}
 									alt={work.title}
