@@ -51,7 +51,7 @@ export const works: Work[] = [
 	// =========================
 	// BRAND
 	// =========================
-	
+
 	{
 		id: 'brand-d',
 		title: 'Pickleball Sports',
@@ -92,7 +92,6 @@ export const works: Work[] = [
 		href: '/projects/detail/brand-b',
 		tags: ['Brand', 'Logo', 'Packaging'],
 	},
-
 
 	// =========================
 	// WEB
@@ -154,10 +153,6 @@ export const works: Work[] = [
 		tags: ['E-commerce', '3D', 'AI'],
 	},
 
-
-
-
-
 	// =========================
 	// BROCHURE
 	// =========================
@@ -177,7 +172,7 @@ export const works: Work[] = [
 // OTHER — Swiss Gallery (1–16)
 // =========================
 
-const otherWorks: Work[] = Array.from({ length: 16 }, (_, i) => {
+const otherWorks: Work[] = Array.from({ length: 21 }, (_, i) => {
 	const index = i + 1;
 	return {
 		id: `other-${index}`,
