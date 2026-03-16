@@ -166,6 +166,33 @@ export const works: Work[] = [
 		href: '/projects/detail/brochure-a',
 		tags: ['Exhibition', 'Editorial Layout'],
 	},
+	{
+		id: 'brochure-b',
+		title: 'WRPD MAGAZINE',
+		year: '2026',
+		category: 'brochure',
+		cover: '/static/images/works/wrpd.jpg',
+		detailImages: [
+			'/static/images/details/wrpd-1.jpg',
+			'/static/images/details/wrpd-2.jpg',
+		],
+		href: '/projects/detail/brochure-b',
+		tags: ['Editorial', 'Catalogue', 'Typography'],
+	},
+	{
+		id: 'brochure-c',
+		title: 'ABOAB',
+		year: '2026',
+		category: 'brochure',
+		cover: '/static/images/works/aboab.jpg',
+		detailImages: [
+			'/static/images/details/aboab-1.jpg',
+			'/static/images/details/aboab-2.jpg',
+			'/static/images/details/aboab-3.jpg',
+		],
+		href: '/projects/detail/brochure-c',
+		tags: ['Editorial', 'Catalogue', 'Typography'],
+	},
 ];
 
 // =========================
