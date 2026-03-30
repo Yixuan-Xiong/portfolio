@@ -51,7 +51,16 @@ export const works: Work[] = [
 	// =========================
 	// BRAND
 	// =========================
-
+	{
+		id: 'brand-e',
+		title: 'LANGRUI Technology',
+		year: '2026',
+		category: 'brand',
+		cover: '/static/images/works/11.jpg',
+		detailImages: ['/static/images/details/LANGRUI.jpg'],
+		href: '/projects/detail/brand-d',
+		tags: ['Brand', 'Logo', 'Packaging', '3D', 'Poster', 'Technology'],
+	},
 	{
 		id: 'brand-d',
 		title: 'Pickleball Sports',
