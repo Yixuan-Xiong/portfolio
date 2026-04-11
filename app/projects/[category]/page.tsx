@@ -1,23 +1,33 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import ProjectsList from '../projects';
 import type { ServiceCategory } from '../constants';
+import ProjectsList from '../projects';
 
-function isValidCategory(value: string): value is ServiceCategory {
-	return value === 'brand' || value === 'web' || value === 'brochure' || value === 'other';
+type ProjectCategory = ServiceCategory | 'product';
+
+function isValidCategory(value: string): value is ProjectCategory {
+	return (
+		value === 'brand' ||
+		value === 'web' ||
+		value === 'brochure' ||
+		value === 'product' ||
+		value === 'other'
+	);
 }
 
-const categoryTitle: Record<ServiceCategory, string> = {
+const categoryTitle: Record<ProjectCategory, string> = {
 	brand: 'Brand Design',
 	web: 'E-commerce / Web Design',
 	brochure: 'Brochure Design',
+	product: 'Product Design',
 	other: 'Other Design',
 };
 
-const categoryDescription: Record<ServiceCategory, string> = {
+const categoryDescription: Record<ProjectCategory, string> = {
 	brand: 'Brand strategy, positioning and identity systems',
 	web: 'E-commerce visuals, web design and UI systems',
 	brochure: 'Catalogues, publications and editorial layouts',
+	product: 'Furniture, object design, prototyping and 3D development',
 	other: '3D modelling and rendering, graphic design, AI design',
 };
 

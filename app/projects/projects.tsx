@@ -1,11 +1,16 @@
-// app/projects/projects.tsx
 'use client';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { type ServiceCategory, works } from './constants';
 
-type CategoryFilter = 'all' | ServiceCategory;
+type CategoryFilter = 'all' | ServiceCategory | 'product';
+
+type BaseWork = (typeof works)[number];
+
+type PageWork = Omit<BaseWork, 'category'> & {
+	category: ServiceCategory | 'product';
+};
 
 export default function ProjectsList({
 	activeCategory,
@@ -14,21 +19,55 @@ export default function ProjectsList({
 }) {
 	const selected: CategoryFilter = activeCategory ?? 'all';
 
-	// ✅ All 页不展示 other
-	const visibleWorks = works.filter((work) => work.category !== 'other');
+	const productWorks: PageWork[] = [
+		{
+			id: 'product-a',
+			title: 'Immersive Installation Design',
+			year: '2025',
+			category: 'product',
+			cover: '/static/images/works/product-1.jpg',
+			detailImages: ['/static/images/details/product-1.jpg'],
+			href: '/projects/detail/product-a',
+			tags: ['Product Design', 'Installation', '3D'],
+		},
+		{
+			id: 'product-b',
+			title: 'Food Trailer Design',
+			year: '2025',
+			category: 'product',
+			cover: '/static/images/works/product-2.jpg',
+			detailImages: ['/static/images/details/product-2.jpg'],
+			href: '/projects/detail/product-b',
+			tags: ['Product Design', 'Interior', '3D'],
+		},
+		{
+			id: 'product-c',
+			title: 'Green City Deisgn',
+			year: '2026',
+			category: 'product',
+			cover: '/static/images/works/product-3.jpg',
+			detailImages: ['/static/images/details/product-3.jpg'],
+			href: '/projects/detail/product-c',
+			tags: ['Product Design', 'Furniture', 'Space', '3D'],
+		},
+	];
+
+	const allWorks: PageWork[] = [...works, ...productWorks];
+
+	const visibleWorks = allWorks.filter((work) => work.category !== 'other');
 
 	const filteredWorks =
 		selected === 'all'
 			? visibleWorks
-			: visibleWorks.filter((work) => work.category === selected);
+			: allWorks.filter((work) => work.category === selected);
 
-	// ✅ 关键：All 的数量也不算 other
 	const counts = {
 		all: visibleWorks.length,
-		brand: works.filter((w) => w.category === 'brand').length,
-		web: works.filter((w) => w.category === 'web').length,
-		brochure: works.filter((w) => w.category === 'brochure').length,
-		other: works.filter((w) => w.category === 'other').length,
+		brand: allWorks.filter((w) => w.category === 'brand').length,
+		web: allWorks.filter((w) => w.category === 'web').length,
+		brochure: allWorks.filter((w) => w.category === 'brochure').length,
+		product: allWorks.filter((w) => w.category === 'product').length,
+		other: allWorks.filter((w) => w.category === 'other').length,
 	};
 
 	const tabs: Array<{
@@ -53,6 +92,11 @@ export default function ProjectsList({
 			href: '/projects/brochure',
 		},
 		{
+			label: `Product design (${counts.product})`,
+			value: 'product',
+			href: '/projects/product',
+		},
+		{
 			label: `Other design (${counts.other})`,
 			value: 'other',
 			href: '/projects/other',
@@ -61,7 +105,6 @@ export default function ProjectsList({
 
 	return (
 		<section className='mt-12'>
-			{/* ================= Tabs ================= */}
 			<div className='flex flex-wrap gap-2 md:gap-3 border-b border-black/10 pb-8 dark:border-white/10'>
 				{tabs.map((tab) => {
 					const isActive = tab.value === selected;
@@ -84,11 +127,9 @@ export default function ProjectsList({
 				})}
 			</div>
 
-			{/* ================= Works Grid ================= */}
 			<div className='mt-16 grid grid-cols-1 gap-x-16 gap-y-24 md:grid-cols-2'>
 				{filteredWorks.map((work) => {
-					const slugOrId =
-						(work as unknown as { slug?: string }).slug ?? String(work.id);
+					const slugOrId = (work as { slug?: string }).slug ?? String(work.id);
 					const detailHref = `/projects/detail/${slugOrId}`;
 
 					return (
@@ -108,7 +149,6 @@ export default function ProjectsList({
 								/>
 							</div>
 
-							{/* ✅ 标题/右侧 View：改回更克制的字号 */}
 							<div className='mt-7 flex items-start justify-between'>
 								<h3 className='text-[clamp(1.15rem,1.4vw,1.55rem)] font-medium tracking-tight text-black dark:text-white'>
 									{work.title}
@@ -119,7 +159,6 @@ export default function ProjectsList({
 								</span>
 							</div>
 
-							{/* ✅ tags：改回更小、更轻 */}
 							<div className='mt-3 flex flex-wrap gap-x-3 gap-y-2 text-[13px] leading-[1.7] text-gray-500 dark:text-gray-400 opacity-80'>
 								{work.year && <span>{work.year}</span>}
 								{work.tags?.map((tag) => (

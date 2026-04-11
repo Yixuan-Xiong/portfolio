@@ -58,7 +58,7 @@ export const works: Work[] = [
 		category: 'brand',
 		cover: '/static/images/works/11.jpg',
 		detailImages: ['/static/images/details/LANGRUI.jpg'],
-		href: '/projects/detail/brand-d',
+		href: '/projects/detail/brand-e',
 		tags: ['Brand', 'Logo', 'Packaging', '3D', 'Poster', 'Technology'],
 	},
 	{
