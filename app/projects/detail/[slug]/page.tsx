@@ -1,7 +1,59 @@
-import Link from 'next/link';
 import Image from 'next/image';
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { works } from '../../constants';
+import { type ServiceCategory, works } from '../../constants';
+
+// =========================
+// ✅ 扩展类型（支持 product）
+// =========================
+type DetailCategory = ServiceCategory | 'product';
+
+type BaseWork = (typeof works)[number];
+
+type DetailWork = Omit<BaseWork, 'category'> & {
+	category: DetailCategory;
+};
+
+// =========================
+// ✅ Product Works
+// =========================
+const productWorks: DetailWork[] = [
+	{
+		id: 'product-a',
+		title: 'Immersive Installation Design',
+		year: '2025',
+		category: 'product',
+		cover: '/static/images/works/product-1.jpg',
+		detailImages: ['/static/images/details/product-1.jpg'],
+		href: '/projects/detail/product-a',
+		tags: ['Installation Design', 'Spatial Design', '3D Modelling'],
+	},
+	{
+		id: 'product-b',
+		title: 'Food Trailer Design',
+		year: '2025',
+		category: 'product',
+		cover: '/static/images/works/product-2.jpg',
+		detailImages: ['/static/images/details/product-2.jpg'],
+		href: '/projects/detail/product-b',
+		tags: ['Interior Design', 'Mobile Space', '3D Visualisation'],
+	},
+	{
+		id: 'product-c',
+		title: 'Green City Design',
+		year: '2026',
+		category: 'product',
+		cover: '/static/images/works/product-3.jpg',
+		detailImages: ['/static/images/details/product-3.jpg'],
+		href: '/projects/detail/product-c',
+		tags: ['Urban Concept', 'Furniture System', 'Spatial Design'],
+	},
+];
+
+// =========================
+// ✅ 合并所有项目
+// =========================
+const allWorks: DetailWork[] = [...works, ...productWorks];
 
 export default async function WorkDetailPage({
 	params,
@@ -10,7 +62,8 @@ export default async function WorkDetailPage({
 }) {
 	const { slug } = await params;
 
-	const work = works.find((w) => w.id === slug);
+	// ✅ 用 allWorks（关键）
+	const work = allWorks.find((w) => w.id === slug);
 	if (!work) notFound();
 
 	if (!work.detailImages || work.detailImages.length === 0) notFound();
@@ -18,7 +71,9 @@ export default async function WorkDetailPage({
 	const introText =
 		[
 			work.year ? String(work.year) : null,
-			Array.isArray(work.tags) && work.tags.length > 0 ? work.tags.join(' · ') : null,
+			Array.isArray(work.tags) && work.tags.length > 0
+				? work.tags.join(' · ')
+				: null,
 		]
 			.filter(Boolean)
 			.join(' · ') || '';
@@ -67,6 +122,9 @@ export default async function WorkDetailPage({
 	);
 }
 
+// =========================
+// ✅ 静态生成（必须改）
+// =========================
 export function generateStaticParams() {
-	return works.map((w) => ({ slug: w.id }));
+	return allWorks.map((w) => ({ slug: w.id }));
 }

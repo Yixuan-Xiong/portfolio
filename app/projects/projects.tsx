@@ -28,7 +28,7 @@ export default function ProjectsList({
 			cover: '/static/images/works/product-1.jpg',
 			detailImages: ['/static/images/details/product-1.jpg'],
 			href: '/projects/detail/product-a',
-			tags: ['Product Design', 'Installation', '3D'],
+			tags: ['Installation Design', 'Spatial Design', '3D Modelling'],
 		},
 		{
 			id: 'product-b',
@@ -38,17 +38,17 @@ export default function ProjectsList({
 			cover: '/static/images/works/product-2.jpg',
 			detailImages: ['/static/images/details/product-2.jpg'],
 			href: '/projects/detail/product-b',
-			tags: ['Product Design', 'Interior', '3D'],
+			tags: ['Interior Design', 'Mobile Space', '3D Visualisation'],
 		},
 		{
 			id: 'product-c',
-			title: 'Green City Deisgn',
+			title: 'Green City Design',
 			year: '2026',
 			category: 'product',
 			cover: '/static/images/works/product-3.jpg',
 			detailImages: ['/static/images/details/product-3.jpg'],
 			href: '/projects/detail/product-c',
-			tags: ['Product Design', 'Furniture', 'Space', '3D'],
+			tags: ['Urban Concept', 'Furniture System', 'Spatial Design'],
 		},
 	];
 
